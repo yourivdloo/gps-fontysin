@@ -1,10 +1,10 @@
-package its.project.restservice;
+package fontysin.project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestServiceApplicationTests {
+class ProjectApplicationTests {
 
     @Test
     void contextLoads() {
