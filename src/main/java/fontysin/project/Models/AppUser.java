@@ -1,8 +1,9 @@
 package fontysin.project.Models;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlIDREF;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 //@Table(name = "users")
@@ -20,7 +21,7 @@ public class AppUser {
     @Id
     @GeneratedValue
 //    @Column(name="user_id")
-    private int id;
+    private int user_id;
 
 //    @Column(name="pcn")
     private String pcn;
@@ -58,12 +59,18 @@ public class AppUser {
 //    @Column(name="city")
     private String city;
 
-    public int getId() {
-        return id;
+    @ManyToMany
+    @JoinTable(name="project_collaborators",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "project_id") })
+    Collection<Project> data = new ArrayList<>();
+
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int id) {
+        this.user_id = id;
     }
 
     public String getPcn() {
