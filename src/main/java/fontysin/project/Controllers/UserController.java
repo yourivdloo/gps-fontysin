@@ -52,12 +52,12 @@ public class UserController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<AppUser> createUser(@RequestParam(required = false) String pcn, @RequestParam(required= false) String firstName, @RequestParam(required= false) String lastName) {
-        if(pcn != null && !pcn.isEmpty() && firstName != null && !firstName.isEmpty() && lastName != null && !lastName.isEmpty()) {
-            AppUser user = new AppUser(pcn, firstName, lastName);
-            AppUser result = userRepository.save(user);
-            return new ResponseEntity<AppUser>(result, HttpStatus.CREATED);
+        if (Util.EmptyOrNull(new String[]{pcn, firstName, lastName})) {
+            return new ResponseEntity("The user can not be added because it is not complete", HttpStatus.CONFLICT);
         }
-        return new ResponseEntity("The user can not be added because it is not complete", HttpStatus.CONFLICT);
+        AppUser user = new AppUser(pcn, firstName, lastName);
+        AppUser result = userRepository.save(user);
+        return new ResponseEntity<AppUser>(result, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/id/{Id}")
