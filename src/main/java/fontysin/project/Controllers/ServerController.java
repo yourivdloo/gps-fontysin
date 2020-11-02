@@ -1,19 +1,16 @@
 package fontysin.project.Controllers;
 
-import org.springframework.boot.web.servlet.error.ErrorController;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ServerController implements ErrorController {
+public class ServerController {
 
-    @RequestMapping("/error")
-    public String handleError() {
-        return "/";
+    @RequestMapping(value = { "/", "/{x:[\\w\\-]+}", "/{x:^(?!api$).*$}/**/{y:[\\w\\-]+}" })
+    public String getIndex(HttpServletRequest request) {
+        return "/index.html";
     }
 
-    @Override
-    public String getErrorPath() {
-        return null;
-    }
 }
