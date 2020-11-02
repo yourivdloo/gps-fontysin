@@ -1,5 +1,7 @@
 package fontysin.project.Controllers;
 
+import fontysin.project.Exceptions.BadRequestException;
+import fontysin.project.Exceptions.NotFoundException;
 import fontysin.project.Models.user.AppUser;
 import fontysin.project.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class UserController {
         int size = 0;
         for(AppUser user : users){ size++; }
 
-        if(size==0){ return new ResponseEntity("There are currently no users in the database", HttpStatus.NOT_FOUND); }
+        if(size==0){ throw new NotFoundException("There are currently no users in the database"); }
 
         return new ResponseEntity<Iterable<AppUser>>(users, HttpStatus.FOUND);
     }
@@ -34,7 +36,7 @@ public class UserController {
         if (user.isPresent()){
             return new ResponseEntity<AppUser>(user.get(), HttpStatus.FOUND);
         } else {
-            return new ResponseEntity("No user found for this PCN. Please provide a valid PCN.", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("No user found for this PCN. Please provide a valid PCN.");
         }
     }
 
@@ -44,7 +46,7 @@ public class UserController {
         if(user.isPresent()) {
             return new ResponseEntity<AppUser>(user.get(), HttpStatus.FOUND);
         } else {
-            return new ResponseEntity("No user found for this Id. Please provide a valid Id.", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("No user found for this Id. Please provide a valid Id.");
 
         }
     }
@@ -52,7 +54,7 @@ public class UserController {
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<AppUser> createUser(@RequestParam(required = false) String pcn, @RequestParam(required= false) String firstName, @RequestParam(required= false) String lastName) {
         if (Util.EmptyOrNull(new String[]{pcn, firstName, lastName})) {
-            return new ResponseEntity("The user can not be added because it is not complete", HttpStatus.CONFLICT);
+            throw new BadRequestException("The user can not be added because it is not complete");
         }
         AppUser user = new AppUser(pcn, firstName, lastName);
         AppUser result = userRepository.save(user);
@@ -66,7 +68,7 @@ public class UserController {
             userRepository.delete(user.get());
             return new ResponseEntity("User has successfully been deleted.", HttpStatus.OK);
         } else {
-            return new ResponseEntity("User doesn't exist. Might have already been deleted.", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("User doesn't exist. Might have already been deleted.");
         }
     }
 }
