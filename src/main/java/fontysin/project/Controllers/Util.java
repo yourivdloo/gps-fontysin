@@ -26,4 +26,11 @@ public class Util {
             }
         return false;
     }
+
+    static public boolean EmptyOrNull(String input) {
+        if (input == null || input.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }
