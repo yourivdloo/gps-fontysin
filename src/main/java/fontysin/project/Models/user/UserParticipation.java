@@ -1,13 +1,14 @@
-package fontysin.project.Models;
+package fontysin.project.Models.user;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-//@Table(name = "user_references")
-public class UserReference {
+//@Table(name = "user_participations")
+public class UserParticipation {
     @Id
     @GeneratedValue
-//    @Column(name="userreference_id")
+//    @Column(name="userparticipation_id")
     public int id;
 
     @ManyToOne
@@ -17,11 +18,11 @@ public class UserReference {
 //    @Column(name="name")
     private String name;
 
-//    @Column(name="phone_number")
-    private String phoneNumber;
+//    @Column(name="start_date")
+    private LocalDateTime startDate;
 
-//    @Column(name="email_address")
-    private String email;
+//    @Column(name="end_date")
+    private LocalDateTime endDate;
 
     public int getId() {
         return id;
@@ -47,19 +48,19 @@ public class UserReference {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public String getEmail() {
-        return email;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 }

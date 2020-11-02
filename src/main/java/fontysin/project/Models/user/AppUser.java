@@ -1,4 +1,6 @@
-package fontysin.project.Models;
+package fontysin.project.Models.user;
+
+import fontysin.project.Models.Project;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

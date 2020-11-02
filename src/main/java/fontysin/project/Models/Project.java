@@ -1,5 +1,7 @@
 package fontysin.project.Models;
 
+import fontysin.project.Models.user.AppUser;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;

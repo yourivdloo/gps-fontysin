@@ -1,14 +1,14 @@
-package fontysin.project.Models;
+package fontysin.project.Models.user;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-//@Table(name = "user_jobs")
-public class UserJob {
+//@Table(name = "user_studies")
+public class UserStudy {
     @Id
     @GeneratedValue
-//    @Column(name="userjob_id")
+//    @Column(name="userstudy_id")
     public int id;
 
     @ManyToOne
@@ -18,14 +18,17 @@ public class UserJob {
 //    @Column(name="name")
     private String name;
 
-//    @Column(name="city")
-    private String city;
+//    @Column(name="school")
+    private String school;
 
 //    @Column(name="start_date")
     private LocalDateTime startDate;
 
 //    @Column(name="end_date")
     private LocalDateTime endDate;
+
+//    @Column(name="finished")
+    private boolean finished;
 
     public int getId() {
         return id;
@@ -51,12 +54,12 @@ public class UserJob {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public String getSchool() {
+        return school;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public LocalDateTime getStartDate() {
@@ -73,5 +76,13 @@ public class UserJob {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

@@ -1,13 +1,13 @@
-package fontysin.project.Models;
+package fontysin.project.Models.user;
 
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "user_languages")
-public class UserLanguage {
+//@Table(name = "user_licenses")
+public class UserLicense {
     @Id
     @GeneratedValue
-//    @Column(name="userlanguage_id")
+//    @Column(name="userlicense_id")
     public int id;
 
     @ManyToOne

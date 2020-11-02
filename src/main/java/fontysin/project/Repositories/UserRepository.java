@@ -1,6 +1,6 @@
 package fontysin.project.Repositories;
 
-import fontysin.project.Models.AppUser;
+import fontysin.project.Models.user.AppUser;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
