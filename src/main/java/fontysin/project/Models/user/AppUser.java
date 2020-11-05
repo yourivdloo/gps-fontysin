@@ -10,7 +10,7 @@ import java.util.Collection;
 @Entity
 //@Table(name = "users")
 public class AppUser {
-    public AppUser(String pcn, String firstName, String lastName) {
+    public AppUser(int pcn, String firstName, String lastName) {
         this.pcn = pcn;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,13 +20,14 @@ public class AppUser {
 
     }
 
-    @Id
-    @GeneratedValue
-//    @Column(name="user_id")
-    private int user_id;
+//    @Id
+//    @GeneratedValue
+////    @Column(name="user_id")
+//    private int user_id;
 
+    @Id
 //    @Column(name="pcn")
-    private String pcn;
+    private int pcn;
 
 //    @Column(name="email_address")
     private String emailAddress;
@@ -63,23 +64,15 @@ public class AppUser {
 
     @ManyToMany
     @JoinTable(name="project_collaborators",
-            joinColumns = { @JoinColumn(name = "user_id") },
+            joinColumns = { @JoinColumn(name = "pcn") },
             inverseJoinColumns = { @JoinColumn(name = "project_id") })
     Collection<Project> data = new ArrayList<>();
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int id) {
-        this.user_id = id;
-    }
-
-    public String getPcn() {
+    public int getPcn() {
         return pcn;
     }
 
-    public void setPcn(String pcn) {
+    public void setPcn(int pcn) {
         this.pcn = pcn;
     }
 

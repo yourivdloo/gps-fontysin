@@ -23,7 +23,7 @@ public class UserParticipation {
     public int id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "pcn", nullable = false)
     private AppUser appUser;
 
 //    @Column(name="name")
