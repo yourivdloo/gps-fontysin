@@ -6,6 +6,17 @@ import java.time.LocalDateTime;
 @Entity
 //@Table(name = "user_participations")
 public class UserParticipation {
+    public UserParticipation(AppUser appUser, String name, LocalDateTime startDate, LocalDateTime endDate) {
+        this.appUser = appUser;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public UserParticipation(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userparticipation_id")

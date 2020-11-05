@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 //@Table(name = "user_licenses")
 public class UserLicense {
+    public UserLicense(AppUser appUser, String name) {
+        this.appUser = appUser;
+        this.name = name;
+    }
+
+    public UserLicense(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userlicense_id")

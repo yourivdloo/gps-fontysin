@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 //@Table(name = "user_hobbies")
 public class UserHobby {
+    public UserHobby(AppUser appUser, String name) {
+        this.appUser = appUser;
+        this.name = name;
+    }
+
+    public UserHobby(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userhobby_id")
@@ -14,7 +23,7 @@ public class UserHobby {
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser appUser;
 
-//    @Column(name="name")
+    //    @Column(name="name")
     private String name;
 
     public int getId() {

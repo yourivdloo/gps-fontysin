@@ -6,6 +6,18 @@ import java.time.LocalDateTime;
 @Entity
 //@Table(name = "user_jobs")
 public class UserJob {
+    public UserJob(AppUser appUser, String name, String city, LocalDateTime startDate, LocalDateTime endDate) {
+        this.appUser = appUser;
+        this.name = name;
+        this.city = city;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public UserJob(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userjob_id")

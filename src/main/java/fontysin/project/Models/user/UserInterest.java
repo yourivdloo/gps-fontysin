@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 //@Table(name = "user_interests")
 public class UserInterest {
+    public UserInterest(AppUser appUser, String name) {
+        this.appUser = appUser;
+        this.name = name;
+    }
+
+    public UserInterest(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userinterest_id")

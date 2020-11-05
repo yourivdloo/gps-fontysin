@@ -5,6 +5,15 @@ import javax.persistence.*;
 @Entity
 //@Table(name = "user_languages")
 public class UserLanguage {
+    public UserLanguage(AppUser appUser, String name) {
+        this.appUser = appUser;
+        this.name = name;
+    }
+
+    public UserLanguage(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userlanguage_id")

@@ -5,6 +5,17 @@ import javax.persistence.*;
 @Entity
 //@Table(name = "user_references")
 public class UserReference {
+    public UserReference(AppUser appUser, String name, String phoneNumber, String email) {
+        this.appUser = appUser;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public UserReference(){
+
+    }
+
     @Id
     @GeneratedValue
 //    @Column(name="userreference_id")
