@@ -2,15 +2,17 @@ package fontysin.project.services;
 
 import fontysin.project.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public Iterable<AppUser> getAllUsers(){
         Iterable<AppUser> users = userRepository.findAll();
@@ -28,10 +30,7 @@ public class UserService {
     public AppUser getUserByPcn(int pcn) {
         Optional<AppUser> user = userRepository.findByPcn(pcn);
 
-        if (user.isPresent()) {
-            return user.get();
-        }
-        return null;
+        return user.orElse(null);
     }
 
     public AppUser createUser(AppUser user){

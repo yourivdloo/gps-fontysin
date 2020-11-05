@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 public class EntityTests {
@@ -140,12 +141,11 @@ public class EntityTests {
         String school = "Fontys";
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = LocalDateTime.now().plusYears(5);
-        boolean finished = false;
         //Act
-        UserStudy study = new UserStudy(user, name, school, startDate, endDate, finished);
+        UserStudy study = new UserStudy(user, name, school, startDate, endDate, false);
         //Assert
         assertEquals(name, study.getName());
         assertEquals(school, study.getSchool());
-        assertEquals(finished, study.isFinished());
+        assertFalse(study.isFinished());
     }
 }

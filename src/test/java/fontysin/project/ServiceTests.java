@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -20,7 +21,7 @@ class ServiceTests {
     UserRepository userRepository;
 
     @InjectMocks
-    UserService userService = new UserService();
+    UserService userService;
 
     @Test
     void getUserByPcnTest(){
@@ -81,7 +82,7 @@ class ServiceTests {
         boolean success = userService.deleteUser(321012);
 
         //Assert
-        assertEquals(true, success);
+        assertTrue(success);
     }
 
 }

@@ -14,6 +14,6 @@ public class DemoController {
     @GetMapping(path = "/sso")
     public @ResponseBody ResponseEntity<String> getSSO() {
         int pcn = Util.GetPcn();
-        return new ResponseEntity<String>("Your PCN is: " + pcn, HttpStatus.OK);
+        return new ResponseEntity<>("Your PCN is: " + pcn, HttpStatus.OK);
     }
 }
