@@ -1,4 +1,4 @@
-package fontysin.project.Exceptions;
+package fontysin.project.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

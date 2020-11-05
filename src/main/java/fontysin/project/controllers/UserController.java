@@ -1,11 +1,10 @@
-package fontysin.project.Controllers;
+package fontysin.project.controllers;
 
-import fontysin.project.Exceptions.BadRequestException;
-import fontysin.project.Exceptions.InternalServerException;
-import fontysin.project.Exceptions.NotFoundException;
-import fontysin.project.Models.user.AppUser;
-import fontysin.project.Repositories.UserRepository;
-import fontysin.project.Services.UserService;
+import fontysin.project.exceptions.BadRequestException;
+import fontysin.project.exceptions.InternalServerException;
+import fontysin.project.exceptions.NotFoundException;
+import fontysin.project.model.user.AppUser;
+import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

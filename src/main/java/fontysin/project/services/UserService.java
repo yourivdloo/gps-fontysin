@@ -1,7 +1,7 @@
-package fontysin.project.Services;
+package fontysin.project.services;
 
-import fontysin.project.Models.user.AppUser;
-import fontysin.project.Repositories.UserRepository;
+import fontysin.project.model.user.AppUser;
+import fontysin.project.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

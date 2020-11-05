@@ -1,6 +1,6 @@
-package fontysin.project.Models;
+package fontysin.project.model;
 
-import fontysin.project.Models.user.AppUser;
+import fontysin.project.model.user.AppUser;
 
 import javax.persistence.*;
 

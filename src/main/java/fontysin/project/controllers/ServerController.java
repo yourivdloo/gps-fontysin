@@ -1,4 +1,4 @@
-package fontysin.project.Controllers;
+package fontysin.project.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package fontysin.project.Controllers;
+package fontysin.project.controllers;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

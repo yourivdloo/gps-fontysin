@@ -1,4 +1,4 @@
-package fontysin.project.Controllers;
+package fontysin.project.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

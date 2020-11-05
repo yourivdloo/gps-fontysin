@@ -1,4 +1,4 @@
-package fontysin.project.Models.user;
+package fontysin.project.model.user;
 
 import javax.persistence.*;
 

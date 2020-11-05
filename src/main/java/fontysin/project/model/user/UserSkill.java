@@ -1,22 +1,22 @@
-package fontysin.project.Models.user;
+package fontysin.project.model.user;
 
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "user_interests")
-public class UserInterest {
-    public UserInterest(AppUser appUser, String name) {
+//@Table(name = "user_skills")
+public class UserSkill {
+    public UserSkill(AppUser appUser, String name) {
         this.appUser = appUser;
         this.name = name;
     }
 
-    public UserInterest(){
+    public UserSkill(){
 
     }
 
     @Id
     @GeneratedValue
-//    @Column(name="userinterest_id")
+//    @Column(name="userskill_id")
     public int id;
 
     @ManyToOne
