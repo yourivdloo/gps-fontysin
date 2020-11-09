@@ -1,17 +1,23 @@
 package fontysin.project;
 
+import fontysin.project.controllers.DemoController;
+import fontysin.project.controllers.UserController;
+import fontysin.project.controllers.Util;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
 import fontysin.project.services.UserService;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -21,7 +27,7 @@ class ServiceTests {
     UserRepository userRepository;
 
     @InjectMocks
-    UserService userService;
+    UserService userService = new UserService(userRepository);
 
     @Test
     void getUserByPcnTest(){
@@ -82,7 +88,7 @@ class ServiceTests {
         boolean success = userService.deleteUser(321012);
 
         //Assert
-        assertTrue(success);
+        assertEquals(true, success);
     }
 
 }
