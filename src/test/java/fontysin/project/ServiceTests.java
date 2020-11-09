@@ -27,7 +27,7 @@ class ServiceTests {
     UserRepository userRepository;
 
     @InjectMocks
-    UserService userService = new UserService(userRepository);
+    UserService userService;
 
     @Test
     void getUserByPcnTest(){
