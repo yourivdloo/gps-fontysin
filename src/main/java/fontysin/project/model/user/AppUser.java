@@ -20,11 +20,6 @@ public class AppUser {
 
     }
 
-//    @Id
-//    @GeneratedValue
-////    @Column(name="user_id")
-//    private int user_id;
-
     @Id
 //    @Column(name="pcn")
     private int pcn;
