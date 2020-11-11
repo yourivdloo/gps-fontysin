@@ -12,7 +12,7 @@ public class Project {
     @Id
     @GeneratedValue
 //    @Column(name="project_id")
-    private int project_id;
+    private int projectId;
 
 //    @Column(name="name")
     private String name;
@@ -23,12 +23,12 @@ public class Project {
     @ManyToMany(mappedBy="data")
     private Collection<AppUser> users = new ArrayList<>();
 
-    public int getProject_id() {
-        return project_id;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject_id(int id) {
-        this.project_id = id;
+    public void setProjectId(int id) {
+        this.projectId = id;
     }
 
     public String getName() {

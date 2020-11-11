@@ -65,7 +65,7 @@ public class AppUser {
     @ManyToMany
     @JoinTable(name="project_collaborators",
             joinColumns = { @JoinColumn(name = "pcn") },
-            inverseJoinColumns = { @JoinColumn(name = "project_id") })
+            inverseJoinColumns = { @JoinColumn(name = "projectId") })
     Collection<Project> data = new ArrayList<>();
 
     public int getPcn() {

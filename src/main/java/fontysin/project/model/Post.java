@@ -17,7 +17,7 @@ public class Post {
 
     @Id
     @GeneratedValue
-    private int post_id;
+    private int postId;
 
     @ManyToOne
     @JoinColumn(name = "pcn", nullable = false)
@@ -25,12 +25,12 @@ public class Post {
 
     private String content;
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public AppUser getAppUser() {
