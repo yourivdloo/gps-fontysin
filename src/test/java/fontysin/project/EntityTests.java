@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
-public class EntityTests {
+class EntityTests {
 
     @Test
     void appUserCtor(){
