@@ -18,7 +18,7 @@ public class Util {
         try {
             return parseInt(email.split("@")[0]);
         }
-        catch (NumberFormatException ex) {
+        catch (Exception ex) {
             throw new InternalServerException("Unable to parse PCN");
         }
     }

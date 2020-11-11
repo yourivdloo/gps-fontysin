@@ -24,17 +24,17 @@ public class UserController {
     @GetMapping(path="/all")
     public @ResponseBody ResponseEntity<Iterable<AppUser>> getAllUsers(){
         Iterable<AppUser> users = userService.getAllUsers();
-        if(users == null) {
+        if(!users.iterator().hasNext()) {
             throw new NotFoundException("There are currently no users in the database");
         }
-        return new ResponseEntity<>(users, HttpStatus.FOUND);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping(path="/{pcn}")
     public @ResponseBody ResponseEntity<AppUser> getUserByPcn(@PathVariable int pcn){
         AppUser user = userService.getUserByPcn(pcn);
         if (user != null){
-            return new ResponseEntity<>(user, HttpStatus.FOUND);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             throw new NotFoundException("A user with that PCN doesn't exist");
         }
