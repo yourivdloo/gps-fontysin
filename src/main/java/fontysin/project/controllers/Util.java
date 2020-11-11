@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import static java.lang.Integer.parseInt;
 
 public class Util {
-    static public int GetPcn() {
+    private Util() {
+        throw new IllegalStateException("Cannot instantiate Utility Class");
+    }
+
+    public static int getPcn() {
         ServletRequestAttributes attrib = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert attrib != null;
         HttpServletRequest request = attrib.getRequest();
@@ -23,7 +27,7 @@ public class Util {
         }
     }
 
-    static public boolean EmptyOrNull(String[] list) {
+    public static boolean emptyOrNull(String[] list) {
         for (String input : list)
             if (input == null || input.isEmpty()) {
                 return true;
@@ -31,7 +35,7 @@ public class Util {
         return false;
     }
 
-    static public boolean EmptyOrNull(String input) {
+    public static boolean emptyOrNull(String input) {
         return input == null || input.isEmpty();
     }
 }

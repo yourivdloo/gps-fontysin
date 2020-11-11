@@ -13,7 +13,7 @@ public class DemoController {
 
     @GetMapping(path = "/sso")
     public @ResponseBody ResponseEntity<String> getSSO() {
-        int pcn = Util.GetPcn();
+        int pcn = Util.getPcn();
         return new ResponseEntity<>("Your PCN is: " + pcn, HttpStatus.OK);
     }
 }

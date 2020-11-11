@@ -42,11 +42,11 @@ public class UserController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<AppUser> createUser(@RequestBody UserDTO user) {
-        if (Util.EmptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
+        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
 
-        AppUser result = userService.createUser(new AppUser(Util.GetPcn(), user.getFirstName(), user.getLastName()));
+        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
         if(result == null) {
             throw new InternalServerException("We couldn't create the user");
         }
