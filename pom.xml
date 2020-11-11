@@ -8,9 +8,9 @@
     <version>2.3.4.RELEASE</version>  
     <relativePath/>  
     <!-- lookup parent from repository --> 
-  </parent>  
-  <groupId>fontysin.project</groupId>  
-  <artifactId>FontysIn</artifactId>
+  </parent>
+  <groupId>fontysin</groupId>
+  <artifactId>project</artifactId>
   <version>0.0.1-SNAPSHOT</version>  
   <name>FontysIn</name>  
   <description>ITS Project Backend</description>  
@@ -95,7 +95,26 @@
             </resources> 
           </deployment> 
         </configuration> 
-      </plugin> 
-    </plugins> 
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+  </plugins>
   </build> 
 </project>
