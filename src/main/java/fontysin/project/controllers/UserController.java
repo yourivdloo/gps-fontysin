@@ -1,5 +1,6 @@
 package fontysin.project.controllers;
 
+import fontysin.project.dto.UserDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping(path="/new")
-    public @ResponseBody ResponseEntity<AppUser> createUser(@RequestBody AppUser user) {
+    public @ResponseBody ResponseEntity<AppUser> createUser(@RequestBody UserDTO user) {
         if (Util.EmptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
