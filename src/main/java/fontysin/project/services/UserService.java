@@ -17,10 +17,7 @@ public class UserService {
     public Iterable<AppUser> getAllUsers(){
         Iterable<AppUser> users = userRepository.findAll();
 
-        int size = 0;
-        for(AppUser user : users){ size++; }
-
-        if(size==0){
+        if(!users.iterator().hasNext()) {
             return null;
         }
 
