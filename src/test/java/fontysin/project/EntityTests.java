@@ -149,4 +149,6 @@ class EntityTests {
         assertEquals(school, study.getSchool());
         assertFalse(study.isFinished());
     }
+
+
 }
