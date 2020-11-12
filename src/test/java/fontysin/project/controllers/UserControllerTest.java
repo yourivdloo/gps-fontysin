@@ -44,7 +44,7 @@ class UserControllerTest {
         when(mockUserService.getAllUsers()).thenReturn(appUsers);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/users/all")
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/user/all")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -62,7 +62,7 @@ class UserControllerTest {
         when(mockUserService.getAllUsers()).thenReturn(appUsers);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/users/all")
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/user/all")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -79,7 +79,7 @@ class UserControllerTest {
         when(mockUserService.getUserByPcn(422773)).thenReturn(appUser);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/users/422773", 0)
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/user/422773", 0)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -94,7 +94,7 @@ class UserControllerTest {
         when(mockUserService.getUserByPcn(422773)).thenReturn(null);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(get("/api/users/400000", 0)
+        final MockHttpServletResponse response = mockMvc.perform(get("/api/user/400000", 0)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -111,7 +111,7 @@ class UserControllerTest {
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(appUser);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(post("/api/users/new")
+        final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
                 .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
                 .header("x-ms-client-principal-name", "422773@student.fontys.nl")
                 .accept(MediaType.APPLICATION_JSON))
@@ -127,7 +127,7 @@ class UserControllerTest {
         // Setup
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(post("/api/users/new")
+        final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
                 .content("{\"firstName\":\"\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
                 .header("x-ms-client-principal-name", "422773@student.fontys.nl")
                 .accept(MediaType.APPLICATION_JSON))
@@ -143,7 +143,7 @@ class UserControllerTest {
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(null);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(post("/api/users/new")
+        final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
                 .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
                 .header("x-ms-client-principal-name", "422773@student.fontys.nl")
                 .accept(MediaType.APPLICATION_JSON))
@@ -159,7 +159,7 @@ class UserControllerTest {
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(null);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(post("/api/users/new")
+        final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
                 .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
@@ -175,7 +175,7 @@ class UserControllerTest {
         when(mockUserService.deleteUser(0)).thenReturn(true);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(delete("/api/users/{pcn}", 0)
+        final MockHttpServletResponse response = mockMvc.perform(delete("/api/user/{pcn}", 0)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -189,7 +189,7 @@ class UserControllerTest {
         when(mockUserService.getUserByPcn(0)).thenReturn(null);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(delete("/api/users/{pcn}", 0)
+        final MockHttpServletResponse response = mockMvc.perform(delete("/api/user/{pcn}", 0)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
@@ -204,7 +204,7 @@ class UserControllerTest {
         when(mockUserService.deleteUser(0)).thenReturn(false);
 
         // Run the test
-        final MockHttpServletResponse response = mockMvc.perform(delete("/api/users/{pcn}", 0)
+        final MockHttpServletResponse response = mockMvc.perform(delete("/api/user/{pcn}", 0)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
