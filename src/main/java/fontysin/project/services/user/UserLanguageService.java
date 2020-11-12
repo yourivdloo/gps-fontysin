@@ -26,9 +26,7 @@ public class UserLanguageService {
         return userLanguageRepository.findAllByName(name);
     }
 
-    public UserLanguage createUserLanguage(UserLanguage userLanguage){
-        return userLanguageRepository.save(userLanguage);
-    }
+    public UserLanguage createUserLanguage(UserLanguage userLanguage){ return userLanguageRepository.save(userLanguage); }
 
     public boolean deleteUserLanguage(int id){
         Optional<UserLanguage> userLanguage = userLanguageRepository.findById(id);

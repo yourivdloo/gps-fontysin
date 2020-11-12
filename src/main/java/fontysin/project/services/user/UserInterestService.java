@@ -28,9 +28,7 @@ public class UserInterestService {
         return userInterestRepository.findAllByName(name);
     }
 
-    public UserInterest createUserHobby(UserInterest userInterest){
-        return userInterestRepository.save(userInterest);
-    }
+    public UserInterest createUserInterest(UserInterest userInterest){ return userInterestRepository.save(userInterest); }
 
     public boolean deleteUserInterest(int id){
         Optional<UserInterest> userInterest = userInterestRepository.findById(id);
