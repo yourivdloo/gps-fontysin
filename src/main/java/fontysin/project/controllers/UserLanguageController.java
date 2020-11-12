@@ -29,7 +29,7 @@ public class UserLanguageController {
     public @ResponseBody
     ResponseEntity<List<UserLanguage>> getAllLanguagesByUser(@PathVariable int pcn){
         List<UserLanguage> languages= userLanguageService.getAllLanguagesByUser(pcn);
-        if (languages.isEmpty() || languages == null){
+        if (languages.isEmpty()){
             throw new NotFoundException("The user with that PCN doesn't have any languages yet");
         } else {
             return new ResponseEntity<>(languages, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class UserLanguageController {
     @GetMapping(path="/{name}")
     public @ResponseBody ResponseEntity<List<UserLanguage>> getAllUsersByLanguage(@PathVariable String name){
         List<UserLanguage> languages = userLanguageService.getAllUsersByLanguage(name);
-        if (languages.isEmpty() || languages == null){
+        if (languages.isEmpty()) {
             throw new NotFoundException("There are no users with that language yet");
         } else {
             return new ResponseEntity<>(languages, HttpStatus.OK);

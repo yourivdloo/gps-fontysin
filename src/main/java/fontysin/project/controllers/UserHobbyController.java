@@ -27,7 +27,7 @@ public class UserHobbyController {
     @GetMapping(path="/{pcn}")
     public @ResponseBody ResponseEntity<List<UserHobby>> getAllHobbiesByUser(@PathVariable int pcn){
         List<UserHobby> hobbies = userHobbyService.getAllHobbiesByUser(pcn);
-        if (hobbies.isEmpty() || hobbies == null){
+        if (hobbies.isEmpty()){
             throw new NotFoundException("The user with that PCN doesn't have any hobbies yet");
         } else {
             return new ResponseEntity<>(hobbies, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class UserHobbyController {
     @GetMapping(path="/{name}")
     public @ResponseBody ResponseEntity<List<UserHobby>> getAllUsersByHobby(@PathVariable String name){
         List<UserHobby> hobbies = userHobbyService.getAllUsersByHobby(name);
-        if (hobbies.isEmpty() || hobbies == null){
+        if (hobbies.isEmpty()){
             throw new NotFoundException("There are no users with that hobby yet");
         } else {
             return new ResponseEntity<>(hobbies, HttpStatus.OK);

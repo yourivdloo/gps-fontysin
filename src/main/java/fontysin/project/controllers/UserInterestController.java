@@ -29,7 +29,7 @@ public class UserInterestController {
     public @ResponseBody
     ResponseEntity<List<UserInterest>> getAllInterestsByUser(@PathVariable int pcn){
         List<UserInterest> interests = userInterestService.getAllInterestsByUser(pcn);
-        if (interests.isEmpty() || interests == null){
+        if (interests.isEmpty()){
             throw new NotFoundException("The user with that PCN doesn't have any interests yet");
         } else {
             return new ResponseEntity<>(interests, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class UserInterestController {
     @GetMapping(path="/{name}")
     public @ResponseBody ResponseEntity<List<UserInterest>> getAllUsersByInterest(@PathVariable String name){
         List<UserInterest> interests = userInterestService.getAllUsersByInterest(name);
-        if (interests.isEmpty() || interests == null){
+        if (interests.isEmpty()){
             throw new NotFoundException("There are no users with that interest yet");
         } else {
             return new ResponseEntity<>(interests, HttpStatus.OK);

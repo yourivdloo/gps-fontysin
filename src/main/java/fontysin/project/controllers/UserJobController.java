@@ -27,7 +27,7 @@ public class UserJobController {
     public @ResponseBody
     ResponseEntity<List<UserJob>> getAllJobsByUser(@PathVariable int pcn){
         List<UserJob> jobs = userJobService.getAllJobsByUser(pcn);
-        if (jobs.isEmpty() || jobs == null){
+        if (jobs.isEmpty()){
             throw new NotFoundException("The user with that PCN doesn't have any jobs yet");
         } else {
             return new ResponseEntity<>(jobs, HttpStatus.OK);
@@ -37,7 +37,7 @@ public class UserJobController {
     @GetMapping(path="/{name}")
     public @ResponseBody ResponseEntity<List<UserJob>> getAllUsersByJob(@PathVariable String name){
         List<UserJob> jobs = userJobService.getAllUsersByJob(name);
-        if (jobs.isEmpty() || jobs == null){
+        if (jobs.isEmpty()){
             throw new NotFoundException("There are no users with that job yet");
         } else {
             return new ResponseEntity<>(jobs, HttpStatus.OK);
