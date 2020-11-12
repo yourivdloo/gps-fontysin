@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user/hobbies")
+@RequestMapping("/api/user/hobby")
 public class UserHobbyController {
     private final UserHobbyService userHobbyService;
     private final UserService userService;

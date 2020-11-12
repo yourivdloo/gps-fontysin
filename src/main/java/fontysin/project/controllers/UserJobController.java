@@ -9,10 +9,13 @@ import fontysin.project.services.UserService;
 import fontysin.project.services.user.UserJobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
+@RequestMapping("/api/user/job")
 public class UserJobController {
 
     private final UserJobService userJobService;

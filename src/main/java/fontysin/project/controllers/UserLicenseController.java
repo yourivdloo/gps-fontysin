@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/users/licenses")
+@RequestMapping("/api/user/license")
 public class UserLicenseController {
     private final UserLicenseService userLicenseService;
     private final UserService userService;

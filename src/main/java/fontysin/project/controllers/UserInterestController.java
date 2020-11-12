@@ -11,10 +11,13 @@ import fontysin.project.services.user.UserHobbyService;
 import fontysin.project.services.user.UserInterestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
+@RequestMapping("/api/user/interest")
 public class UserInterestController {
 
     private final UserInterestService userInterestService;

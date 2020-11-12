@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/users/participations")
+@RequestMapping("/api/user/participation")
 public class UserParticipationController {
     private final UserParticipationService userParticipationService;
     private final UserService userService;

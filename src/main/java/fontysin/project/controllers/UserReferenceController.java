@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/users/references")
+@RequestMapping("/api/user/reference")
 public class UserReferenceController {
     private final UserReferenceService userReferenceService;
     private final UserService userService;

@@ -11,10 +11,13 @@ import fontysin.project.services.user.UserJobService;
 import fontysin.project.services.user.UserLanguageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Controller
+@RequestMapping("/api/user/language")
 public class UserLanguageController {
 
     private final UserLanguageService userLanguageService;
