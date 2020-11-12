@@ -1,6 +1,7 @@
 package fontysin.project;
 
 import fontysin.project.model.user.*;
+import fontysin.project.model.user.properties.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
