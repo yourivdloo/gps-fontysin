@@ -1,10 +1,12 @@
 package fontysin.project.controllers;
 
+import fontysin.project.dto.CompleteUser;
 import fontysin.project.dto.UserDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
+import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final PropertyService propertyService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PropertyService propertyService) {
         this.userService = userService;
+        this.propertyService = propertyService;
     }
 
     @GetMapping(path="/all")
@@ -31,10 +35,11 @@ public class UserController {
     }
 
     @GetMapping(path="/{pcn}")
-    public @ResponseBody ResponseEntity<AppUser> getUserByPcn(@PathVariable int pcn){
+    public @ResponseBody ResponseEntity<CompleteUser> getUserByPcn(@PathVariable int pcn){
         AppUser user = userService.getUserByPcn(pcn);
         if (user != null){
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            CompleteUser toSend = new CompleteUser(user.getFirstName(), user.getLastName(), propertyService.getUserProperties(user.getPcn()));
+            return new ResponseEntity<>(toSend, HttpStatus.OK);
         } else {
             throw new NotFoundException("A user with that PCN doesn't exist");
         }

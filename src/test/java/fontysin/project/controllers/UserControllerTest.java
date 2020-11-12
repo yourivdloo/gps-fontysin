@@ -1,7 +1,9 @@
 package fontysin.project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fontysin.project.dto.CompleteUser;
 import fontysin.project.model.user.AppUser;
+import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,9 @@ class UserControllerTest {
 
     @MockBean
     private UserService mockUserService;
+
+    @MockBean
+    private PropertyService propertyService;
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -73,6 +78,7 @@ class UserControllerTest {
     @Test
     void testGetUserByPcn() throws Exception {
         // Setup
+        final CompleteUser expected = new CompleteUser("firstName", "lastName", Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
         final AppUser appUser = new AppUser(422773, "firstName", "lastName");
@@ -85,7 +91,7 @@ class UserControllerTest {
 
         // Verify the results
         assertEquals(HttpStatus.OK.value(), response.getStatus());
-        assertEquals(mapper.writeValueAsString(appUser), response.getContentAsString());
+        assertEquals(mapper.writeValueAsString(expected), response.getContentAsString());
     }
 
     @Test
