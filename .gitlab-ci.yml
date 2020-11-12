@@ -1,9 +1,17 @@
+stages:
+  - build
+  - test
+  - sonarqube
 build:
+  stage: build
   script: "mvn compile"
 test:
-  script: "mvn test"
   stage: test
-sonarqube-check:
+  script: "mvn test"
+  dependencies:
+    - build
+sonarqube:
+  stage: sonarqube
   image: maven:3.6.3-jdk-11
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
@@ -19,3 +27,5 @@ sonarqube-check:
     - merge_requests
     - master
     - develop
+  dependencies:
+    - test

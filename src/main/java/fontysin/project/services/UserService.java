@@ -1,7 +1,6 @@
 package fontysin.project.services;
 
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.properties.UserHobby;
 import fontysin.project.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,7 @@ public class UserService {
     }
 
     public Iterable<AppUser> getAllUsers(){
-        Iterable<AppUser> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 
     public AppUser getUserByPcn(int pcn) {
