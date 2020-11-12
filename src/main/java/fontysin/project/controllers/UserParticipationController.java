@@ -4,9 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserLicense;
 import fontysin.project.model.user.UserParticipation;
-import fontysin.project.services.UserLicenseService;
 import fontysin.project.services.UserParticipationService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -36,7 +33,7 @@ public class UserParticipationController {
     }
 
     @GetMapping(path = "/{name}")
-    public @ResponseBody ResponseEntity<List<UserParticipation>> getAllUsersByParticipations(@PathVariable String name){
+    public @ResponseBody ResponseEntity<List<UserParticipation>> getAllUsersByParticipation(@PathVariable String name){
         List<UserParticipation> userParticipations = userParticipationService.getAllUsersByParticipation(name);
 
         if(userParticipations.isEmpty()){
@@ -46,13 +43,13 @@ public class UserParticipationController {
     }
 
     @PostMapping(path = "/new")
-    public @ResponseBody ResponseEntity<UserParticipation> createUserLicense(@RequestParam String name, @RequestParam LocalDateTime startDate, LocalDateTime endDate){
-        if (Util.EmptyOrNull(name)) {
-            throw new BadRequestException("The license was not created - Missing Arguments");
+    public @ResponseBody ResponseEntity<UserParticipation> createUserParticipation(@RequestBody UserParticipation userParticipation){
+        if (userParticipation == null) {
+            throw new BadRequestException("The participation was not created - Missing Arguments");
         }
 
         AppUser user = userService.getUserByPcn(Util.GetPcn());
-        UserParticipation userParticipation = new UserParticipation(user, name, startDate, endDate);
+        userParticipation.setAppUser(user);
         UserParticipation result = userParticipationService.createUserParticipation(userParticipation);
 
         if(result == null) {

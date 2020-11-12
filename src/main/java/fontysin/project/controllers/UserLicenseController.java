@@ -43,13 +43,13 @@ public class UserLicenseController {
     }
 
     @PostMapping(path = "/new")
-    public @ResponseBody ResponseEntity<UserLicense> createUserLicense(@RequestParam String name){
-        if (Util.EmptyOrNull(name)) {
+    public @ResponseBody ResponseEntity<UserLicense> createUserLicense(@RequestBody UserLicense userLicense){
+        if (userLicense == null) {
             throw new BadRequestException("The license was not created - Missing Arguments");
         }
 
         AppUser user = userService.getUserByPcn(Util.GetPcn());
-        UserLicense userLicense = new UserLicense(user, name);
+        userLicense.setAppUser(user);
         UserLicense result = userLicenseService.createUserLicense(userLicense);
 
         if(result == null) {
