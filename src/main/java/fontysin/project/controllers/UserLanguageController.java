@@ -4,8 +4,8 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserJob;
-import fontysin.project.model.user.UserLanguage;
+import fontysin.project.model.user.properties.UserJob;
+import fontysin.project.model.user.properties.UserLanguage;
 import fontysin.project.services.UserService;
 import fontysin.project.services.user.UserJobService;
 import fontysin.project.services.user.UserLanguageService;
@@ -48,10 +48,10 @@ public class UserLanguageController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<UserLanguage> createLanguage(@RequestBody UserLanguage language){
-        if (Util.EmptyOrNull(new String[]{language.getName(), String.valueOf(Util.GetPcn())})) {
+        if (Util.emptyOrNull(new String[]{language.getName(), String.valueOf(Util.getPcn())})) {
             throw new BadRequestException("The language was not created - Missing Arguments");
         }
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         language.setAppUser(user);
         UserLanguage result = userLanguageService.createUserLanguage(language);
         if(result == null) {

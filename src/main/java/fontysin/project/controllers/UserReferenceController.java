@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserReference;
+import fontysin.project.model.user.properties.UserReference;
 import fontysin.project.services.UserReferenceService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -49,7 +49,7 @@ public class UserReferenceController {
             throw new BadRequestException("The reference was not created - Missing Arguments");
         }
 
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         userReference.setAppUser(user);
         UserReference result = userReferenceService.createUserReference(userReference);
 

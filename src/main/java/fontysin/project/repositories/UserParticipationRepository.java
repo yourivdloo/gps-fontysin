@@ -1,7 +1,7 @@
 package fontysin.project.repositories;
 
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserParticipation;
+import fontysin.project.model.user.properties.UserParticipation;
 import org.apache.catalina.User;
 import org.springframework.data.repository.CrudRepository;
 

@@ -1,7 +1,7 @@
 package fontysin.project.repositories;
 
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserPersonalityTrait;
+import fontysin.project.model.user.properties.UserPersonalityTrait;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

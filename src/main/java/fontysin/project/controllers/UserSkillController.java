@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserSkill;
+import fontysin.project.model.user.properties.UserSkill;
 import fontysin.project.services.UserService;
 import fontysin.project.services.UserSkillService;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ public class UserSkillController {
     @GetMapping()
     public @ResponseBody
     ResponseEntity<List<UserSkill>> getAllSkillsByUser() {
-        List<UserSkill> userSkills = userSkillService.getAllSkillsByUser(Util.GetPcn());
+        List<UserSkill> userSkills = userSkillService.getAllSkillsByUser(Util.getPcn());
 
         if(userSkills.isEmpty()){
             throw new NotFoundException("There are no skills registered for the specified user");
@@ -49,7 +49,7 @@ public class UserSkillController {
             throw new BadRequestException("The skill was not created - Missing Arguments");
         }
 
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         userSkill.setAppUser(user);
         UserSkill result = userSkillService.createUserSkill(userSkill);
 

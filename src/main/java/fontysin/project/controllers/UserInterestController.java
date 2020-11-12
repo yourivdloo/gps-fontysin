@@ -4,8 +4,8 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserHobby;
-import fontysin.project.model.user.UserInterest;
+import fontysin.project.model.user.properties.UserHobby;
+import fontysin.project.model.user.properties.UserInterest;
 import fontysin.project.services.UserService;
 import fontysin.project.services.user.UserHobbyService;
 import fontysin.project.services.user.UserInterestService;
@@ -48,10 +48,10 @@ public class UserInterestController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<UserInterest> createInterest(@RequestBody UserInterest interest){
-        if (Util.EmptyOrNull(new String[]{interest.getName(), String.valueOf(Util.GetPcn())})) {
+        if (Util.emptyOrNull(new String[]{interest.getName(), String.valueOf(Util.getPcn())})) {
             throw new BadRequestException("The interest was not created - Missing Arguments");
         }
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         interest.setAppUser(user);
         UserInterest result = userInterestService.createUserInterest(interest);
         if(result == null) {

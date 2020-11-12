@@ -1,6 +1,6 @@
 package fontysin.project.repositories;
 
-import fontysin.project.model.user.UserSkill;
+import fontysin.project.model.user.properties.UserSkill;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserParticipation;
+import fontysin.project.model.user.properties.UserParticipation;
 import fontysin.project.services.UserParticipationService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class UserParticipationController {
             throw new BadRequestException("The participation was not created - Missing Arguments");
         }
 
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         userParticipation.setAppUser(user);
         UserParticipation result = userParticipationService.createUserParticipation(userParticipation);
 

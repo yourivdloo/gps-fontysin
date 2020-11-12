@@ -1,6 +1,6 @@
 package fontysin.project.services;
 
-import fontysin.project.model.user.UserReference;
+import fontysin.project.model.user.properties.UserReference;
 import fontysin.project.repositories.UserReferenceRepository;
 import org.springframework.stereotype.Service;
 

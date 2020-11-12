@@ -1,7 +1,7 @@
 package fontysin.project.services.user;
 
-import fontysin.project.model.user.UserJob;
-import fontysin.project.model.user.UserLanguage;
+import fontysin.project.model.user.properties.UserJob;
+import fontysin.project.model.user.properties.UserLanguage;
 import fontysin.project.repositories.UserJobRepository;
 import fontysin.project.repositories.UserLanguageRepository;
 import org.springframework.stereotype.Service;

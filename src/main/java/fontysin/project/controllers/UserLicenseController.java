@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserLicense;
+import fontysin.project.model.user.properties.UserLicense;
 import fontysin.project.services.UserLicenseService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class UserLicenseController {
 
     @GetMapping()
     public @ResponseBody ResponseEntity<List<UserLicense>> getAllLicensesByUser() {
-        List<UserLicense> userLicenses = userLicenseService.getAllLicensesByUser(Util.GetPcn());
+        List<UserLicense> userLicenses = userLicenseService.getAllLicensesByUser(Util.getPcn());
 
         if(userLicenses.isEmpty()){
             throw new NotFoundException("There are no licenses registered for the specified user");
@@ -48,7 +48,7 @@ public class UserLicenseController {
             throw new BadRequestException("The license was not created - Missing Arguments");
         }
 
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         userLicense.setAppUser(user);
         UserLicense result = userLicenseService.createUserLicense(userLicense);
 

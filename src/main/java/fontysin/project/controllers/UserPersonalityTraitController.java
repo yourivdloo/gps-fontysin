@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserPersonalityTrait;
+import fontysin.project.model.user.properties.UserPersonalityTrait;
 import fontysin.project.services.UserPersonalityTraitService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -49,7 +49,7 @@ public class UserPersonalityTraitController {
             throw new BadRequestException("The personality trait was not created - Missing Arguments");
         }
 
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         userPersonalityTrait.setAppUser(user);
         UserPersonalityTrait result = userPersonalityTraitService.createUserPersonalityTrait(userPersonalityTrait);
 

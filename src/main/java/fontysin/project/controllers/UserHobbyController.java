@@ -3,7 +3,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserHobby;
+import fontysin.project.model.user.properties.UserHobby;
 import fontysin.project.services.UserService;
 import fontysin.project.services.user.UserHobbyService;
 import org.springframework.http.HttpStatus;
@@ -46,10 +46,10 @@ public class UserHobbyController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<UserHobby> createHobby(@RequestBody UserHobby hobby){
-        if (Util.EmptyOrNull(new String[]{hobby.getName(), String.valueOf(Util.GetPcn())})) {
+        if (Util.emptyOrNull(new String[]{hobby.getName(), String.valueOf(Util.getPcn())})) {
             throw new BadRequestException("The hobby was not created - Missing Arguments");
         }
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         hobby.setAppUser(user);
         UserHobby result = userHobbyService.createUserHobby(hobby);
         if(result == null) {

@@ -1,7 +1,7 @@
 package fontysin.project.services;
 
-import fontysin.project.model.user.UserLicense;
-import fontysin.project.model.user.UserParticipation;
+import fontysin.project.model.user.properties.UserLicense;
+import fontysin.project.model.user.properties.UserParticipation;
 import fontysin.project.repositories.UserParticipationRepository;
 import org.springframework.stereotype.Service;
 

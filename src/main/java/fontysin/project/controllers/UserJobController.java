@@ -4,7 +4,7 @@ import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserJob;
+import fontysin.project.model.user.properties.UserJob;
 import fontysin.project.services.UserService;
 import fontysin.project.services.user.UserJobService;
 import org.springframework.http.HttpStatus;
@@ -46,10 +46,10 @@ public class UserJobController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<UserJob> createJob(@RequestBody UserJob job){
-        if (Util.EmptyOrNull(new String[]{job.getName(), String.valueOf(Util.GetPcn())})) {
+        if (Util.emptyOrNull(new String[]{job.getName(), String.valueOf(Util.getPcn())})) {
             throw new BadRequestException("The job was not created - Missing Arguments");
         }
-        AppUser user = userService.getUserByPcn(Util.GetPcn());
+        AppUser user = userService.getUserByPcn(Util.getPcn());
         job.setAppUser(user);
         UserJob result = userJobService.createUserJob(job);
         if(result == null) {

@@ -1,7 +1,7 @@
 package fontysin.project.services;
 
-import fontysin.project.model.user.UserReference;
-import fontysin.project.model.user.UserSkill;
+import fontysin.project.model.user.properties.UserReference;
+import fontysin.project.model.user.properties.UserSkill;
 import fontysin.project.repositories.UserReferenceRepository;
 import fontysin.project.repositories.UserSkillRepository;
 import org.springframework.stereotype.Service;

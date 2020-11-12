@@ -1,5 +1,5 @@
 package fontysin.project.repositories;
-import fontysin.project.model.user.UserLanguage;
+import fontysin.project.model.user.properties.UserLanguage;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

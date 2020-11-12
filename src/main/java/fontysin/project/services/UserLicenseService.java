@@ -1,7 +1,7 @@
 package fontysin.project.services;
 
 import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserLicense;
+import fontysin.project.model.user.properties.UserLicense;
 import fontysin.project.repositories.UserLicenseRepository;
 import org.springframework.stereotype.Service;
 
