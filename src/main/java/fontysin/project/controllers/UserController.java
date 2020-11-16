@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
@@ -46,16 +47,18 @@ public class UserController {
     }
 
     @PostMapping(path="/new")
-    public @ResponseBody ResponseEntity<AppUser> createUser(@RequestBody UserDTO user) {
-        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
-            throw new BadRequestException("The user was not created - Missing Arguments");
-        }
+    public @ResponseBody ResponseEntity<Object> createUser(@RequestBody UserDTO user) {
+        return new ResponseEntity<>(user, HttpStatus.OK);
 
-        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
-        if(result == null) {
-            throw new InternalServerException("We couldn't create the user");
-        }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+//        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
+//            throw new BadRequestException("The user was not created - Missing Arguments");
+//        }
+//
+//        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
+//        if(result == null) {
+//            throw new InternalServerException("We couldn't create the user");
+//        }
+//        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{pcn}")
@@ -70,5 +73,18 @@ public class UserController {
             throw new InternalServerException("We couldn't delete the user");
         }
         return new ResponseEntity<>("The user with PCN " + pcn + " has been deleted.", HttpStatus.OK);
+    }
+
+    @PutMapping(path="/{pcn}")
+    public @ResponseBody ResponseEntity<AppUser> updateUser(@PathVariable int pcn, @RequestBody UserDTO user) {
+        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
+            throw new BadRequestException("The user was not updated - Missing Arguments");
+        }
+
+        AppUser result = null;//userService.updateUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
+        if(result == null) {
+            throw new InternalServerException("We couldn't update the user");
+        }
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

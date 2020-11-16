@@ -24,14 +24,17 @@ public class AppUser {
 //    @Column(name="pcn")
     private int pcn;
 
-//    @Column(name="email_address")
-    private String emailAddress;
-
 //    @Column(name="first_name")
     private String firstName;
 
+//    @Column(name="prefix")
+//    private String prefix;
+
 //    @Column(name="last_name")
     private String lastName;
+
+//    @Column(name="email_address")
+    private String emailAddress;
 
 //    @Column(name="privacy_settings")
     private int privacySettings;
