@@ -1,6 +1,7 @@
 package fontysin.project.services;
 
 import fontysin.project.controllers.Util;
+import fontysin.project.dto.UserPropertiesDTO;
 import fontysin.project.dto.UserPropertyDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.model.user.AppUser;
@@ -9,6 +10,8 @@ import fontysin.project.model.user.properties.*;
 import fontysin.project.repositories.PropertyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,6 +67,54 @@ public class PropertyService {
         return propertyRepository.save(toAdd);
     }
 
+    public void addUserProperties(UserPropertiesDTO userPropertiesDTO) {
+        AppUser appUser = userService.getUserByPcn(Util.getPcn());
+
+        List<UserProperty> toAdd = new ArrayList<>();
+
+        for(UserHobby userHobby : userPropertiesDTO.getHobbies()) {
+            toAdd.add(new UserHobby(appUser, userHobby.getName()));
+        }
+
+        for(UserInterest userInterest : userPropertiesDTO.getInterests()) {
+            toAdd.add(new UserInterest(appUser, userInterest.getName()));
+        }
+
+        for(UserJob userJob : userPropertiesDTO.getJobs()) {
+            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
+        }
+
+        for(UserLanguage userLanguage : userPropertiesDTO.getLanguages()) {
+            toAdd.add(new UserLanguage(appUser, userLanguage.getName()));
+        }
+
+        for(UserLicense userLicense : userPropertiesDTO.getLicenses()) {
+            toAdd.add(new UserLicense(appUser, userLicense.getName()));
+        }
+
+        for(UserParticipation userParticipation : userPropertiesDTO.getParticipations()) {
+            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
+        }
+
+        for(UserPersonalityTrait userPersonalityTrait : userPropertiesDTO.getPersonalityTraits()) {
+            toAdd.add(new UserPersonalityTrait(appUser, userPersonalityTrait.getName()));
+        }
+
+        for(UserReference userReference : userPropertiesDTO.getReferences()) {
+            toAdd.add(new UserReference(appUser, userReference.getName(), userReference.getPhoneNumber(), userReference.getEmail()));
+        }
+
+        for(UserSkill userSkill : userPropertiesDTO.getSkills()) {
+            toAdd.add(new UserSkill(appUser, userSkill.getName()));
+        }
+
+        for(UserStudy userStudy : userPropertiesDTO.getStudies()) {
+            toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
+        }
+
+        propertyRepository.saveAll(toAdd);
+    }
+
     public boolean removeUserProperty(int propertyId) {
         Optional<UserProperty> userPropertyOptional = propertyRepository.findById(propertyId);
         if(userPropertyOptional.isEmpty()) {
@@ -77,4 +128,5 @@ public class PropertyService {
     public Iterable<UserProperty> getUserProperties(int pcn) {
         return propertyRepository.findByAppUserPcn(pcn);
     }
+
 }

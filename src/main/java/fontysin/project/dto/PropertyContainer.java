@@ -33,13 +33,13 @@ public class PropertyContainer {
                     personalityTraits.add(prop.getName());
                     break;
                 case "UserReference":
-                    userReferences.add(prop.getName());
+                    references.add(prop.getName());
                     break;
                 case "UserSkill":
-                    userSkills.add(prop.getName());
+                    skills.add(prop.getName());
                     break;
                 case "UserStudy":
-                    userStudies.add(prop.getName());
+                    studies.add(prop.getName());
                     break;
                 default:
                     throw new InternalServerException("An unknown UserProperty was encountered, type=" + prop.getClass().toString());
@@ -54,9 +54,9 @@ public class PropertyContainer {
     private List<Object> licenses = new ArrayList<>();
     private List<Object> participations = new ArrayList<>();
     private List<Object> personalityTraits = new ArrayList<>();
-    private List<Object> userReferences = new ArrayList<>();
-    private List<Object> userSkills = new ArrayList<>();
-    private List<Object> userStudies = new ArrayList<>();
+    private List<Object> references = new ArrayList<>();
+    private List<Object> skills = new ArrayList<>();
+    private List<Object> studies = new ArrayList<>();
 
     public List<Object> getHobbies() {
         return hobbies;
@@ -86,15 +86,15 @@ public class PropertyContainer {
         return personalityTraits;
     }
 
-    public List<Object> getUserReferences() {
-        return userReferences;
+    public List<Object> getReferences() {
+        return references;
     }
 
-    public List<Object> getUserSkills() {
-        return userSkills;
+    public List<Object> getSkills() {
+        return skills;
     }
 
-    public List<Object> getUserStudies() {
-        return userStudies;
+    public List<Object> getStudies() {
+        return studies;
     }
 }

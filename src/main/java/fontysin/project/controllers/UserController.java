@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping(path="/new")
-    public @ResponseBody ResponseEntity<AppUser> createUser(@RequestBody UserDTO user) {
+    public @ResponseBody ResponseEntity<CompleteUser> createUser(@RequestBody UserDTO user) {
         if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
@@ -55,7 +55,13 @@ public class UserController {
         if(result == null) {
             throw new InternalServerException("We couldn't create the user");
         }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+
+        propertyService.addUserProperties(user.getUserPropertiesDTO());
+
+        AppUser addedUser = userService.getUserByPcn(Util.getPcn());
+        CompleteUser toSend = new CompleteUser(addedUser.getFirstName(), addedUser.getLastName(), propertyService.getUserProperties(addedUser.getPcn()));
+
+        return new ResponseEntity<>(toSend, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{pcn}")
