@@ -58,8 +58,7 @@ public class UserController {
 
         propertyService.addUserProperties(user.getUserPropertiesDTO());
 
-        AppUser addedUser = userService.getUserByPcn(Util.getPcn());
-        CompleteUser toSend = new CompleteUser(addedUser.getFirstName(), addedUser.getLastName(), propertyService.getUserProperties(addedUser.getPcn()));
+        CompleteUser toSend = new CompleteUser(result.getFirstName(), result.getLastName(), propertyService.getUserProperties(result.getPcn()));
 
         return new ResponseEntity<>(toSend, HttpStatus.CREATED);
     }

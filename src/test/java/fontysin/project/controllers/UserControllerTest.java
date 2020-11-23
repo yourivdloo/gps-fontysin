@@ -2,7 +2,10 @@ package fontysin.project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fontysin.project.dto.CompleteUser;
+import fontysin.project.dto.UserPropertiesDTO;
 import fontysin.project.model.user.AppUser;
+import fontysin.project.model.user.UserProperty;
+import fontysin.project.model.user.properties.UserHobby;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +40,7 @@ class UserControllerTest {
     private UserService mockUserService;
 
     @MockBean
-    private PropertyService propertyService;
+    private PropertyService mockPropertyService;
 
     ObjectMapper mapper = new ObjectMapper();
 
@@ -116,16 +120,21 @@ class UserControllerTest {
         final AppUser appUser = new AppUser(422773, "firstName", "lastName");
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(appUser);
 
+        //Configure PropertyService.propertyService.getUserProperties(...).
+        final List<UserProperty> userProperties = new ArrayList<>();
+        userProperties.add(new UserHobby(appUser, "Lego"));
+        when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
+
         // Run the test
         final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
-                .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"UserPropertiesDTO\":[{\"hobbies\":[{\"name\":\"Lego\"}]}]}").contentType(MediaType.APPLICATION_JSON)
                 .header("x-ms-client-principal-name", "422773@student.fontys.nl")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         // Verify the results
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-        assertEquals(mapper.writeValueAsString(appUser), response.getContentAsString());
+        assertEquals("{\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"userProperties\":{\"hobbies\":[\"Lego\"],\"interests\":[],\"jobs\":[],\"languages\":[],\"licenses\":[],\"participations\":[],\"personalityTraits\":[],\"references\":[],\"skills\":[],\"studies\":[]}}", response.getContentAsString());
     }
 
     @Test
