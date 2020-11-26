@@ -49,7 +49,7 @@ class UserControllerTest {
         // Setup
 
         // Configure UserService.getAllUsers(...).
-        final Iterable<AppUser> appUsers = List.of(new AppUser(0, "firstName", "lastName"));
+        final Iterable<AppUser> appUsers = List.of(new AppUser(0, "firstName", "", "lastName"));
         when(mockUserService.getAllUsers()).thenReturn(appUsers);
 
         // Run the test
@@ -85,7 +85,7 @@ class UserControllerTest {
         final CompleteUser expected = new CompleteUser("firstName", "lastName", Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
-        final AppUser appUser = new AppUser(422773, "firstName", "lastName");
+        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.getUserByPcn(422773)).thenReturn(appUser);
 
         // Run the test
@@ -117,7 +117,7 @@ class UserControllerTest {
         // Setup
 
         //Configure UserService.createUser(...).
-        final AppUser appUser = new AppUser(422773, "firstName", "lastName");
+        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(appUser);
 
         //Configure PropertyService.propertyService.getUserProperties(...).
@@ -186,7 +186,7 @@ class UserControllerTest {
     @Test
     void testDeleteUser() throws Exception {
         // Setup
-        when(mockUserService.getUserByPcn(0)).thenReturn(new AppUser(0, "firstName", "lastName"));
+        when(mockUserService.getUserByPcn(0)).thenReturn(new AppUser(0, "firstName", "", "lastName"));
         when(mockUserService.deleteUser(0)).thenReturn(true);
 
         // Run the test
@@ -215,7 +215,7 @@ class UserControllerTest {
     @Test
     void testDeleteUser_ServerError() throws Exception {
         // Setup
-        when(mockUserService.getUserByPcn(0)).thenReturn(new AppUser(0, "firstName", "lastName"));
+        when(mockUserService.getUserByPcn(0)).thenReturn(new AppUser(0, "firstName", "", "lastName"));
         when(mockUserService.deleteUser(0)).thenReturn(false);
 
         // Run the test

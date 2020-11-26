@@ -1,21 +1,25 @@
 package fontysin.project.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 public class UserDTO {
+    private int pcn;
+    private String emailAddress;
     private String firstName;
-
+    private String prefix;
     private String lastName;
-
-    private UserPropertiesDTO userPropertiesDTO;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public UserPropertiesDTO getUserPropertiesDTO() {
-        return userPropertiesDTO;
-    }
+    private int privacySettings;
+    private String nationality;
+    private String birthday;
+    private String birthPlace;
+    private String phoneNumber;
+    private String address;
+    private String zipCode;
+    private String city;
+    private UserPropertiesDTO userProperties;
 }

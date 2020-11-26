@@ -18,10 +18,11 @@ class EntityTests {
         //Arrange
         int pcn = 123456;
         String firstName = "Alex";
+        String prefix = "";
         String lastName = "Jones";
 
         //Act
-        AppUser appUser = new AppUser(pcn, firstName, lastName);
+        AppUser appUser = new AppUser(pcn, firstName, prefix, lastName);
 
         //Assert
         assertEquals(pcn, appUser.getPcn());
@@ -30,7 +31,7 @@ class EntityTests {
     @Test
     void userHobbyCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Programming";
         //Act
         UserHobby hobby = new UserHobby(user, name);
@@ -41,7 +42,7 @@ class EntityTests {
     @Test
     void userInterestCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Programming";
         //Act
         UserInterest interest = new UserInterest(user, name);
@@ -52,7 +53,7 @@ class EntityTests {
     @Test
     void userJobCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "McDonald's employee";
         String city = "Eindhoven";
         LocalDateTime startDate = LocalDateTime.now();
@@ -67,7 +68,7 @@ class EntityTests {
     @Test
     void userLanguageCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Dutch";
         //Act
         UserLanguage language = new UserLanguage(user, name);
@@ -78,7 +79,7 @@ class EntityTests {
     @Test
     void userLicenseCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Fontys HBO-ICT Software engineer";
         //Act
         UserLicense license = new UserLicense(user, name);
@@ -89,7 +90,7 @@ class EntityTests {
     @Test
     void userParticipationCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Fontys open day";
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime endDate = LocalDateTime.now().plusDays(2);
@@ -102,7 +103,7 @@ class EntityTests {
     @Test
     void userPersonalityTraitCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "Social";
         //Act
         UserPersonalityTrait trait = new UserPersonalityTrait(user, name);
@@ -113,7 +114,7 @@ class EntityTests {
     @Test
     void userReferenceCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "student";
         String phoneNumber = "0612345678";
         String email = "Alex.Jones@gmail.com";
@@ -126,7 +127,7 @@ class EntityTests {
     @Test
     void userSkillCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "quick thinker";
         //Act
         UserSkill skill = new UserSkill(user, name);
@@ -137,7 +138,7 @@ class EntityTests {
     @Test
     void userStudyCtor(){
         //Arrange
-        AppUser user = new AppUser(123456, "Alex", "Jones");
+        AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "quick thinker";
         String school = "Fontys";
         LocalDateTime startDate = LocalDateTime.now();

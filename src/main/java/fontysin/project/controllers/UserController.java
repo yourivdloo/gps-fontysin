@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
@@ -51,12 +52,12 @@ public class UserController {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
 
-        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
+        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getPrefix(), user.getLastName()));
         if(result == null) {
             throw new InternalServerException("We couldn't create the user");
         }
 
-        propertyService.addUserProperties(user.getUserPropertiesDTO());
+        propertyService.addUserProperties(user.getUserProperties());
 
         CompleteUser toSend = new CompleteUser(result.getFirstName(), result.getLastName(), propertyService.getUserProperties(result.getPcn()));
 

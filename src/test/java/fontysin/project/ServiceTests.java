@@ -33,7 +33,7 @@ class ServiceTests {
     void getUserByPcnTest(){
         //Arrange
         int pcn = 123456;
-        AppUser user = new AppUser(pcn, "Alex", "Jones");
+        AppUser user = new AppUser(pcn, "Alex", "", "Jones");
 
         when(userRepository.findByPcn(pcn)).thenReturn(Optional.of(user));
 
@@ -47,9 +47,9 @@ class ServiceTests {
     @Test
     void getAllUsers(){
         //Arrange
-        AppUser user1 = new AppUser(123456,"Alex", "Jones");
-        AppUser user2 = new AppUser(654321, "Steve", "Diamond");
-        AppUser user3 = new AppUser(112233, "Kendall", "Schmidt");
+        AppUser user1 = new AppUser(123456,"Alex", "", "Jones");
+        AppUser user2 = new AppUser(654321, "Steve", "", "Diamond");
+        AppUser user3 = new AppUser(112233, "Kendall", "", "Schmidt");
         AppUser[] userList = {user1, user2, user3};
 
         Iterable<AppUser> iterable = Arrays.asList(userList);
@@ -66,7 +66,7 @@ class ServiceTests {
     @Test
     void createUserTest(){
         //Arrange
-        AppUser user = new AppUser(332211, "John", "Johnson");
+        AppUser user = new AppUser(332211, "John", "", "Johnson");
 
         when(userRepository.save(user)).thenReturn(user);
 
@@ -80,7 +80,7 @@ class ServiceTests {
     @Test
     void deleteUserTest(){
         //Arrange
-        AppUser user = new AppUser(321012, "Ronald", "McDonald");
+        AppUser user = new AppUser(321012, "Ronald", "", "McDonald");
 
         when(userRepository.findByPcn(321012)).thenReturn(Optional.of(user));
 

@@ -1,18 +1,23 @@
 package fontysin.project.model.user;
 
 import fontysin.project.model.Project;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Getter
+@Setter
 @Entity
 //@Table(name = "users")
 public class AppUser {
-    public AppUser(int pcn, String firstName, String lastName) {
+    public AppUser(int pcn, String firstName, String Prefix, String lastName) {
         this.pcn = pcn;
         this.firstName = firstName;
+        this.prefix = prefix;
         this.lastName = lastName;
     }
 
@@ -29,6 +34,9 @@ public class AppUser {
 
 //    @Column(name="first_name")
     private String firstName;
+
+//    @Column(name="prefix")
+    private String prefix;
 
 //    @Column(name="last_name")
     private String lastName;
@@ -63,99 +71,4 @@ public class AppUser {
             inverseJoinColumns = { @JoinColumn(name = "projectId") })
     Collection<Project> data = new ArrayList<>();
 
-    public int getPcn() {
-        return pcn;
-    }
-
-    public void setPcn(int pcn) {
-        this.pcn = pcn;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getPrivacySettings() {
-        return privacySettings;
-    }
-
-    public void setPrivacySettings(int privacySettings) {
-        this.privacySettings = privacySettings;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getBirthPlace() {
-        return birthPlace;
-    }
-
-    public void setBirthPlace(String birthPlace) {
-        this.birthPlace = birthPlace;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
 }

@@ -37,7 +37,7 @@ class PropertyControllerTest {
     @Test
     void testAddUserProperty() throws Exception {
         // Setup
-        final AppUser appUser = new AppUser(422773, "first", "last");
+        final AppUser appUser = new AppUser(422773, "first", "", "last");
         final UserProperty userProperty = new UserSkill(appUser, "Organizing");
 
         when(mockPropertyService.addUserProperty(any(UserPropertyDTO.class))).thenReturn(userProperty);
