@@ -3,6 +3,7 @@ package fontysin.project.dto;
 
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.model.user.UserProperty;
+import fontysin.project.model.user.properties.UserJob;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,34 +13,34 @@ public class PropertyContainer {
         for(UserProperty prop : userProperties) {
             switch(prop.getClass().getSimpleName()) {
                 case "UserHobby":
-                    hobbies.add(prop.getName());
+                    hobbies.add(prop);
                     break;
                 case "UserInterest":
-                    interests.add(prop.getName());
+                    interests.add(prop);
                     break;
                 case "UserJob":
-                    jobs.add(prop.getName());
+                    jobs.add(prop);
                     break;
                 case "UserLanguage":
-                    languages.add(prop.getName());
+                    languages.add(prop);
                     break;
                 case "UserLicense":
-                    licenses.add(prop.getName());
+                    licenses.add(prop);
                     break;
                 case "UserParticipation":
-                    participations.add(prop.getName());
+                    participations.add(prop);
                     break;
                 case "UserPersonalityTrait":
-                    personalityTraits.add(prop.getName());
+                    personalityTraits.add(prop);
                     break;
                 case "UserReference":
-                    references.add(prop.getName());
+                    references.add(prop);
                     break;
                 case "UserSkill":
-                    skills.add(prop.getName());
+                    skills.add(prop);
                     break;
                 case "UserStudy":
-                    studies.add(prop.getName());
+                    studies.add(prop);
                     break;
                 default:
                     throw new InternalServerException("An unknown UserProperty was encountered, type=" + prop.getClass().toString());
