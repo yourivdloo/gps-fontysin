@@ -120,10 +120,13 @@ class UserControllerTest {
         final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(appUser);
 
-        //Configure PropertyService.propertyService.getUserProperties(...).
+        //Configure PropertyService.getUserProperties(...).
         final List<UserProperty> userProperties = new ArrayList<>();
         userProperties.add(new UserHobby(appUser, "Lego"));
         when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
+
+        //Expected Result
+        final CompleteUser expected = new CompleteUser(appUser, userProperties);
 
         // Run the test
         final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
@@ -134,7 +137,7 @@ class UserControllerTest {
 
         // Verify the results
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-        assertEquals("{\"pcn\":422773,\"emailAddress\":null,\"firstName\":\"firstName\",\"prefix\":null,\"lastName\":\"lastName\",\"privacySettings\":0,\"nationality\":null,\"birthday\":null,\"birthPlace\":null,\"phoneNumber\":null,\"address\":null,\"zipCode\":null,\"city\":null,\"userProperties\":{\"hobbies\":[\"Lego\"],\"interests\":[],\"jobs\":[],\"languages\":[],\"licenses\":[],\"participations\":[],\"personalityTraits\":[],\"references\":[],\"skills\":[],\"studies\":[]}}", response.getContentAsString());
+        assertEquals(mapper.writeValueAsString(expected), response.getContentAsString());
     }
 
     @Test
