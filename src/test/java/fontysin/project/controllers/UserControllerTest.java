@@ -1,8 +1,7 @@
 package fontysin.project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fontysin.project.dto.CompleteUser;
-import fontysin.project.dto.UserPropertiesDTO;
+import fontysin.project.dto.UserDTO;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.model.user.UserProperty;
 import fontysin.project.model.user.properties.UserHobby;
@@ -20,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,7 +81,7 @@ class UserControllerTest {
     void testGetUserByPcn() throws Exception {
         // Setup
         final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
-        final CompleteUser expected = new CompleteUser(appUser, Collections.emptyList());
+        final UserDTO expected = new UserDTO(appUser, Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
         when(mockUserService.getUserByPcn(422773)).thenReturn(appUser);
@@ -126,7 +124,7 @@ class UserControllerTest {
         when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
 
         //Expected Result
-        final CompleteUser expected = new CompleteUser(appUser, userProperties);
+        final UserDTO expected = new UserDTO(appUser, userProperties);
 
         // Run the test
         final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")

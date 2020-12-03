@@ -1,6 +1,5 @@
 package fontysin.project.controllers;
 
-import fontysin.project.dto.CompleteUser;
 import fontysin.project.dto.UserDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
@@ -35,10 +34,10 @@ public class UserController {
     }
 
     @GetMapping(path="/{pcn}")
-    public @ResponseBody ResponseEntity<CompleteUser> getUserByPcn(@PathVariable int pcn){
+    public @ResponseBody ResponseEntity<UserDTO> getUserByPcn(@PathVariable int pcn){
         AppUser user = userService.getUserByPcn(pcn);
         if (user != null){
-            CompleteUser toSend = new CompleteUser(user, propertyService.getUserProperties(user.getPcn()));
+            UserDTO toSend = new UserDTO(user, propertyService.getUserProperties(user.getPcn()));
             return new ResponseEntity<>(toSend, HttpStatus.OK);
         } else {
             throw new NotFoundException("A user with that PCN doesn't exist");
@@ -46,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping(path="/new")
-    public @ResponseBody ResponseEntity<CompleteUser> createUser(@RequestBody UserDTO user) {
+    public @ResponseBody ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
@@ -56,13 +55,9 @@ public class UserController {
             throw new InternalServerException("We couldn't create the user");
         }
 
+        propertyService.addUserProperties(user.getUserPropertiesDTO());
 
-
-
-
-        propertyService.addUserProperties(user.getUserProperties());
-
-        CompleteUser toSend = new CompleteUser(result, propertyService.getUserProperties(result.getPcn()));
+        UserDTO toSend = new UserDTO(result, propertyService.getUserProperties(result.getPcn()));
 
         return new ResponseEntity<>(toSend, HttpStatus.CREATED);
     }
