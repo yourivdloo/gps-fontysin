@@ -8,9 +8,7 @@ import fontysin.project.repositories.UserRepository;
 import fontysin.project.services.UserService;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -68,13 +67,16 @@ class ServiceTests {
         //Arrange
         AppUser user = new AppUser(332211, "John", "", "Johnson");
 
-        when(userRepository.save(user)).thenReturn(user);
+        try(MockedStatic<Util> utilMockedStatic = Mockito.mockStatic(Util.class)) {
+            utilMockedStatic.when(Util::getPcn).thenReturn(332211);
+            when(userRepository.save(user)).thenReturn(user);
 
-        //Act
-        AppUser actual = userService.createUser(user);
+            //Act
+            AppUser actual = userService.createUser(user);
 
-        //Assert
-        assertEquals(user, actual);
+            //Assert
+            assertEquals(user, actual);
+        }
     }
 
     @Test
@@ -88,7 +90,7 @@ class ServiceTests {
         boolean success = userService.deleteUser(321012);
 
         //Assert
-        assertEquals(true, success);
+        assertTrue(success);
     }
 
 }

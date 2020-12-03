@@ -82,10 +82,10 @@ class UserControllerTest {
     @Test
     void testGetUserByPcn() throws Exception {
         // Setup
-        final CompleteUser expected = new CompleteUser("firstName", "lastName", Collections.emptyList());
+        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName", "test@test.nl", 1, "NL", "03-15-1995", "", "0612345678", "Testlane", "1234 AB", "Testvile");
+        final CompleteUser expected = new CompleteUser(appUser, Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
-        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.getUserByPcn(422773)).thenReturn(appUser);
 
         // Run the test
@@ -120,10 +120,13 @@ class UserControllerTest {
         final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.createUser(any(AppUser.class))).thenReturn(appUser);
 
-        //Configure PropertyService.propertyService.getUserProperties(...).
+        //Configure PropertyService.getUserProperties(...).
         final List<UserProperty> userProperties = new ArrayList<>();
         userProperties.add(new UserHobby(appUser, "Lego"));
         when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
+
+        //Expected Result
+        final CompleteUser expected = new CompleteUser(appUser, userProperties);
 
         // Run the test
         final MockHttpServletResponse response = mockMvc.perform(post("/api/user/new")
@@ -134,7 +137,7 @@ class UserControllerTest {
 
         // Verify the results
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-        assertEquals("{\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"userProperties\":{\"hobbies\":[\"Lego\"],\"interests\":[],\"jobs\":[],\"languages\":[],\"licenses\":[],\"participations\":[],\"personalityTraits\":[],\"references\":[],\"skills\":[],\"studies\":[]}}", response.getContentAsString());
+        assertEquals(mapper.writeValueAsString(expected), response.getContentAsString());
     }
 
     @Test

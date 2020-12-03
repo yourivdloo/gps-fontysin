@@ -39,7 +39,7 @@ public class UserController {
     public @ResponseBody ResponseEntity<CompleteUser> getUserByPcn(@PathVariable int pcn){
         AppUser user = userService.getUserByPcn(pcn);
         if (user != null){
-            CompleteUser toSend = new CompleteUser(user.getFirstName(), user.getLastName(), propertyService.getUserProperties(user.getPcn()));
+            CompleteUser toSend = new CompleteUser(user, propertyService.getUserProperties(user.getPcn()));
             return new ResponseEntity<>(toSend, HttpStatus.OK);
         } else {
             throw new NotFoundException("A user with that PCN doesn't exist");
@@ -52,14 +52,18 @@ public class UserController {
             throw new BadRequestException("The user was not created - Missing Arguments");
         }
 
-        AppUser result = userService.createUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getPrefix(), user.getLastName()));
+        AppUser result = userService.createUser(new AppUser(user));
         if(result == null) {
             throw new InternalServerException("We couldn't create the user");
         }
 
+
+
+
+
         propertyService.addUserProperties(user.getUserProperties());
 
-        CompleteUser toSend = new CompleteUser(result.getFirstName(), result.getLastName(), propertyService.getUserProperties(result.getPcn()));
+        CompleteUser toSend = new CompleteUser(result, propertyService.getUserProperties(result.getPcn()));
 
         return new ResponseEntity<>(toSend, HttpStatus.CREATED);
     }
@@ -76,5 +80,18 @@ public class UserController {
             throw new InternalServerException("We couldn't delete the user");
         }
         return new ResponseEntity<>("The user with PCN " + pcn + " has been deleted.", HttpStatus.OK);
+    }
+
+    @PutMapping(path="/{pcn}")
+    public @ResponseBody ResponseEntity<AppUser> updateUser(@PathVariable int pcn, @RequestBody UserDTO user) {
+        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
+            throw new BadRequestException("The user was not updated - Missing Arguments");
+        }
+
+        AppUser result = null;//userService.updateUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
+        if(result == null) {
+            throw new InternalServerException("We couldn't update the user");
+        }
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

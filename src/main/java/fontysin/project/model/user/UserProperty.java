@@ -1,5 +1,7 @@
 package fontysin.project.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,7 @@ public abstract class UserProperty {
     @Column
     private String name;
 
+    @JsonIgnore
     @ManyToOne
     @JoinTable(name = "PropertyUser", joinColumns = {@JoinColumn(name = "PropertyId", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "UserPcn", referencedColumnName = "pcn")})
     private AppUser appUser;
