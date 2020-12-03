@@ -82,7 +82,7 @@ class UserControllerTest {
     @Test
     void testGetUserByPcn() throws Exception {
         // Setup
-        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName", "test@test.nl", 1, "NL", "03-15-1995", "", "0612345678", "Testlane", "1234 AB", "Testvile");
+        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         final CompleteUser expected = new CompleteUser(appUser, Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
