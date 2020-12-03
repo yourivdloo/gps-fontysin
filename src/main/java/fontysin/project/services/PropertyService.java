@@ -30,7 +30,7 @@ public class PropertyService {
         UserProperty toAdd;
 
         AppUser appUser = userService.getUserByPcn(Util.getPcn());
-        switch(type) {
+        switch (type) {
             case "hobby":
                 toAdd = new UserHobby(appUser, userPropertyDTO.getName());
                 break;
@@ -72,64 +72,45 @@ public class PropertyService {
 
         List<UserProperty> toAdd = new ArrayList<>();
 
-        if(userPropertiesDTO.getHobbies() != null && userPropertiesDTO.getHobbies().size() > 0){
-            for(UserHobby userHobby : userPropertiesDTO.getHobbies()) {
-                toAdd.add(new UserHobby(appUser, userHobby.getName()));
-            }
+        for (UserHobby userHobby : emptyIfNull(userPropertiesDTO.getHobbies())) {
+            toAdd.add(new UserHobby(appUser, userHobby.getName()));
         }
 
-        if(userPropertiesDTO.getInterests() != null && userPropertiesDTO.getInterests().size() > 0) {
-            for (UserInterest userInterest : userPropertiesDTO.getInterests()) {
-                toAdd.add(new UserInterest(appUser, userInterest.getName()));
-            }
+        for (UserInterest userInterest : emptyIfNull(userPropertiesDTO.getInterests())) {
+            toAdd.add(new UserInterest(appUser, userInterest.getName()));
         }
 
-        if(userPropertiesDTO.getJobs() != null && userPropertiesDTO.getJobs().size() > 0) {
-            for (UserJob userJob : userPropertiesDTO.getJobs()) {
-                toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
-            }
+        for (UserJob userJob : emptyIfNull(userPropertiesDTO.getJobs())) {
+            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
         }
 
-        if(userPropertiesDTO.getLanguages() != null && userPropertiesDTO.getLanguages().size() > 0) {
-            for (UserLanguage userLanguage : userPropertiesDTO.getLanguages()) {
-                toAdd.add(new UserLanguage(appUser, userLanguage.getName()));
-            }
+        for (UserLanguage userLanguage : emptyIfNull(userPropertiesDTO.getLanguages())) {
+            toAdd.add(new UserLanguage(appUser, userLanguage.getName()));
         }
 
-        if(userPropertiesDTO.getLicenses() != null && userPropertiesDTO.getLicenses().size() > 0) {
-            for (UserLicense userLicense : userPropertiesDTO.getLicenses()) {
-                toAdd.add(new UserLicense(appUser, userLicense.getName()));
-            }
+        for (UserLicense userLicense : emptyIfNull(userPropertiesDTO.getLicenses())) {
+            toAdd.add(new UserLicense(appUser, userLicense.getName()));
         }
 
-        if(userPropertiesDTO.getParticipations() != null && userPropertiesDTO.getParticipations().size() > 0) {
-            for (UserParticipation userParticipation : userPropertiesDTO.getParticipations()) {
-                toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
-            }
+        for (UserParticipation userParticipation : emptyIfNull(userPropertiesDTO.getParticipations())) {
+            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
         }
 
-        if(userPropertiesDTO.getPersonalityTraits() != null && userPropertiesDTO.getPersonalityTraits().size() > 0) {
-            for (UserPersonalityTrait userPersonalityTrait : userPropertiesDTO.getPersonalityTraits()) {
-                toAdd.add(new UserPersonalityTrait(appUser, userPersonalityTrait.getName()));
-            }
+
+        for (UserPersonalityTrait userPersonalityTrait : emptyIfNull(userPropertiesDTO.getPersonalityTraits())) {
+            toAdd.add(new UserPersonalityTrait(appUser, userPersonalityTrait.getName()));
         }
 
-        if(userPropertiesDTO.getReferences() != null && userPropertiesDTO.getReferences().size() > 0) {
-            for (UserReference userReference : userPropertiesDTO.getReferences()) {
-                toAdd.add(new UserReference(appUser, userReference.getName(), userReference.getPhoneNumber(), userReference.getEmail()));
-            }
+        for (UserReference userReference : emptyIfNull(userPropertiesDTO.getReferences())) {
+            toAdd.add(new UserReference(appUser, userReference.getName(), userReference.getPhoneNumber(), userReference.getEmail()));
         }
 
-        if(userPropertiesDTO.getSkills() != null && userPropertiesDTO.getSkills().size() > 0) {
-            for (UserSkill userSkill : userPropertiesDTO.getSkills()) {
-                toAdd.add(new UserSkill(appUser, userSkill.getName()));
-            }
+        for (UserSkill userSkill : emptyIfNull(userPropertiesDTO.getSkills())) {
+            toAdd.add(new UserSkill(appUser, userSkill.getName()));
         }
 
-        if(userPropertiesDTO.getStudies() != null && userPropertiesDTO.getStudies().size() > 0) {
-            for (UserStudy userStudy : userPropertiesDTO.getStudies()) {
-                toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
-            }
+        for (UserStudy userStudy : emptyIfNull(userPropertiesDTO.getStudies())) {
+            toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
         }
 
         propertyRepository.saveAll(toAdd);
@@ -137,7 +118,7 @@ public class PropertyService {
 
     public boolean removeUserProperty(int propertyId) {
         Optional<UserProperty> userPropertyOptional = propertyRepository.findById(propertyId);
-        if(userPropertyOptional.isEmpty()) {
+        if (userPropertyOptional.isEmpty()) {
             return false;
         }
 
@@ -149,4 +130,7 @@ public class PropertyService {
         return propertyRepository.findByAppUserPcn(pcn);
     }
 
+    private <T> Iterable<T> emptyIfNull(Iterable<T> iterable) {
+        return iterable == null ? List.of() : iterable;
+    }
 }
