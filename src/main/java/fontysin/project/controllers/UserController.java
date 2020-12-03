@@ -4,6 +4,7 @@ import fontysin.project.dto.UserDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
+import fontysin.project.exceptions.NotImplementedException;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
@@ -82,10 +83,6 @@ public class UserController {
             throw new BadRequestException("The user was not updated - Missing Arguments");
         }
 
-        AppUser result = null;//userService.updateUser(new AppUser(Util.getPcn(), user.getFirstName(), user.getLastName()));
-        if(result == null) {
-            throw new InternalServerException("We couldn't update the user");
-        }
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        throw new NotImplementedException("");
     }
 }
