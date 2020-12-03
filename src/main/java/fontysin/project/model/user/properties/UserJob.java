@@ -3,8 +3,7 @@ package fontysin.project.model.user.properties;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.model.user.UserProperty;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.Entity;
 
 @Entity(name = "Job")
 public class UserJob extends UserProperty {
