@@ -1,5 +1,7 @@
 package fontysin.project.services;
 
+import fontysin.project.controllers.Util;
+import fontysin.project.exceptions.ConflictException;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,11 @@ public class UserService {
     }
 
     public AppUser createUser(AppUser user){
+        user.setPcn(Util.getPcn());
+
+        if(userRepository.findByPcn(user.getPcn()).isPresent()) {
+            throw new ConflictException("A user with this PCN already exists");
+        }
         return userRepository.save(user);
     }
 
