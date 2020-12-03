@@ -3,7 +3,7 @@ package fontysin.project.model.user.properties;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.model.user.UserProperty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity(name = "License")
 public class UserLicense extends UserProperty {

@@ -1,7 +1,5 @@
 package fontysin.project.dto;
 
-import java.time.LocalDateTime;
-
 public class UserPropertyDTO {
     private String type;
     private String name;

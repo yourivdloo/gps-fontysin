@@ -3,7 +3,7 @@ package fontysin.project.model.user.properties;
 import fontysin.project.model.user.AppUser;
 import fontysin.project.model.user.UserProperty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 @Entity(name = "Reference")
 public class UserReference extends UserProperty {
     public UserReference(AppUser appUser, String name, String phoneNumber, String email) {

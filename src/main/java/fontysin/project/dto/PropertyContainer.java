@@ -3,7 +3,6 @@ package fontysin.project.dto;
 
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.model.user.UserProperty;
-import fontysin.project.model.user.properties.UserJob;
 
 import java.util.ArrayList;
 import java.util.List;
