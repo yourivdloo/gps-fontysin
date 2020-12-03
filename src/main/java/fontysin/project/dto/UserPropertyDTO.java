@@ -9,8 +9,8 @@ public class UserPropertyDTO {
     private String phoneNumber;
     private String city;
     private String school;
-    private LocalDateTime endDate;
-    private LocalDateTime startDate;
+    private String endDate;
+    private String startDate;
     private Boolean finished;
 
     public String getType() {
@@ -37,11 +37,11 @@ public class UserPropertyDTO {
         return school;
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 

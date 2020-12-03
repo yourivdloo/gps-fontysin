@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "Participation")
 public class UserParticipation extends UserProperty {
-    public UserParticipation(AppUser appUser, String name, LocalDateTime startDate, LocalDateTime endDate) {
+    public UserParticipation(AppUser appUser, String name, String startDate, String endDate) {
         super(appUser, name);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -18,23 +18,23 @@ public class UserParticipation extends UserProperty {
 
     }
 
-    private LocalDateTime startDate;
+    private String startDate;
 
-    private LocalDateTime endDate;
+    private String endDate;
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 }

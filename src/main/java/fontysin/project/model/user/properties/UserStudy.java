@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "Study")
 public class UserStudy extends UserProperty {
-    public UserStudy(AppUser appUser, String name, String school, LocalDateTime startDate, LocalDateTime endDate, boolean finished) {
+    public UserStudy(AppUser appUser, String name, String school, String startDate, String endDate, boolean finished) {
         super(appUser, name);
         this.school = school;
         this.startDate = startDate;
@@ -22,9 +22,9 @@ public class UserStudy extends UserProperty {
 
     private String school;
 
-    private LocalDateTime startDate;
+    private String startDate;
 
-    private LocalDateTime endDate;
+    private String endDate;
 
     private boolean finished;
 
@@ -36,19 +36,19 @@ public class UserStudy extends UserProperty {
         this.school = school;
     }
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

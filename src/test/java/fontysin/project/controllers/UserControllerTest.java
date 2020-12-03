@@ -82,10 +82,10 @@ class UserControllerTest {
     @Test
     void testGetUserByPcn() throws Exception {
         // Setup
-        final CompleteUser expected = new CompleteUser("firstName", "lastName", Collections.emptyList());
+        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName", "test@test.nl", 1, "NL", "03-15-1995", "", "0612345678", "Testlane", "1234 AB", "Testvile");
+        final CompleteUser expected = new CompleteUser(appUser, Collections.emptyList());
 
         // Configure UserService.getUserByPcn(...).
-        final AppUser appUser = new AppUser(422773, "firstName", "", "lastName");
         when(mockUserService.getUserByPcn(422773)).thenReturn(appUser);
 
         // Run the test
@@ -134,7 +134,7 @@ class UserControllerTest {
 
         // Verify the results
         assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-        assertEquals("{\"firstName\":\"firstName\",\"lastName\":\"lastName\",\"userProperties\":{\"hobbies\":[\"Lego\"],\"interests\":[],\"jobs\":[],\"languages\":[],\"licenses\":[],\"participations\":[],\"personalityTraits\":[],\"references\":[],\"skills\":[],\"studies\":[]}}", response.getContentAsString());
+        assertEquals("{\"pcn\":422773,\"emailAddress\":null,\"firstName\":\"firstName\",\"prefix\":null,\"lastName\":\"lastName\",\"privacySettings\":0,\"nationality\":null,\"birthday\":null,\"birthPlace\":null,\"phoneNumber\":null,\"address\":null,\"zipCode\":null,\"city\":null,\"userProperties\":{\"hobbies\":[\"Lego\"],\"interests\":[],\"jobs\":[],\"languages\":[],\"licenses\":[],\"participations\":[],\"personalityTraits\":[],\"references\":[],\"skills\":[],\"studies\":[]}}", response.getContentAsString());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package fontysin.project.model.user;
 
+import fontysin.project.dto.UserDTO;
 import fontysin.project.model.Project;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,39 @@ import java.util.Collection;
 @Entity
 //@Table(name = "users")
 public class AppUser {
+    public AppUser(int pcn, String firstName, String prefix, String lastName, String emailAddress, int privacySettings, String nationality, String birthday, String birthPlace, String phoneNumber, String address, String zipCode, String city
+    ) {
+        this.pcn = pcn;
+        this.firstName = firstName;
+        this.prefix = prefix;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.privacySettings = privacySettings;
+        this.nationality = nationality;
+        this.birthday = birthday;
+        this.birthPlace = birthPlace;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
+
+    public AppUser(UserDTO user) {
+        this.pcn = user.getPcn();
+        this.firstName = user.getFirstName();
+        this.prefix = user.getPrefix();
+        this.lastName = user.getLastName();
+        this.emailAddress = user.getEmailAddress();
+        this.privacySettings = user.getPrivacySettings();
+        this.nationality = user.getNationality();
+        this.birthday = user.getBirthday();
+        this.birthPlace = user.getBirthPlace();
+        this.phoneNumber = user.getPhoneNumber();
+        this.address = user.getAddress();
+        this.zipCode = user.getZipCode();
+        this.city = user.getCity();
+    }
+
     public AppUser(int pcn, String firstName, String Prefix, String lastName) {
         this.pcn = pcn;
         this.firstName = firstName;
@@ -48,7 +82,7 @@ public class AppUser {
     private String nationality;
 
 //    @Column(name="birthday")
-    private LocalDateTime birthday;
+    private String birthday;
 
 //    @Column(name="birth_place")
     private String birthPlace;

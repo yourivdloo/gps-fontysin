@@ -72,44 +72,64 @@ public class PropertyService {
 
         List<UserProperty> toAdd = new ArrayList<>();
 
-        for(UserHobby userHobby : userPropertiesDTO.getHobbies()) {
-            toAdd.add(new UserHobby(appUser, userHobby.getName()));
+        if(userPropertiesDTO.getHobbies() != null && userPropertiesDTO.getHobbies().size() > 0){
+            for(UserHobby userHobby : userPropertiesDTO.getHobbies()) {
+                toAdd.add(new UserHobby(appUser, userHobby.getName()));
+            }
         }
 
-        for(UserInterest userInterest : userPropertiesDTO.getInterests()) {
-            toAdd.add(new UserInterest(appUser, userInterest.getName()));
+        if(userPropertiesDTO.getInterests() != null && userPropertiesDTO.getInterests().size() > 0) {
+            for (UserInterest userInterest : userPropertiesDTO.getInterests()) {
+                toAdd.add(new UserInterest(appUser, userInterest.getName()));
+            }
         }
 
-        for(UserJob userJob : userPropertiesDTO.getJobs()) {
-            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
+        if(userPropertiesDTO.getJobs() != null && userPropertiesDTO.getJobs().size() > 0) {
+            for (UserJob userJob : userPropertiesDTO.getJobs()) {
+                toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
+            }
         }
 
-        for(UserLanguage userLanguage : userPropertiesDTO.getLanguages()) {
-            toAdd.add(new UserLanguage(appUser, userLanguage.getName()));
+        if(userPropertiesDTO.getLanguages() != null && userPropertiesDTO.getLanguages().size() > 0) {
+            for (UserLanguage userLanguage : userPropertiesDTO.getLanguages()) {
+                toAdd.add(new UserLanguage(appUser, userLanguage.getName()));
+            }
         }
 
-        for(UserLicense userLicense : userPropertiesDTO.getLicenses()) {
-            toAdd.add(new UserLicense(appUser, userLicense.getName()));
+        if(userPropertiesDTO.getLicenses() != null && userPropertiesDTO.getLicenses().size() > 0) {
+            for (UserLicense userLicense : userPropertiesDTO.getLicenses()) {
+                toAdd.add(new UserLicense(appUser, userLicense.getName()));
+            }
         }
 
-        for(UserParticipation userParticipation : userPropertiesDTO.getParticipations()) {
-            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
+        if(userPropertiesDTO.getParticipations() != null && userPropertiesDTO.getParticipations().size() > 0) {
+            for (UserParticipation userParticipation : userPropertiesDTO.getParticipations()) {
+                toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
+            }
         }
 
-        for(UserPersonalityTrait userPersonalityTrait : userPropertiesDTO.getPersonalityTraits()) {
-            toAdd.add(new UserPersonalityTrait(appUser, userPersonalityTrait.getName()));
+        if(userPropertiesDTO.getPersonalityTraits() != null && userPropertiesDTO.getPersonalityTraits().size() > 0) {
+            for (UserPersonalityTrait userPersonalityTrait : userPropertiesDTO.getPersonalityTraits()) {
+                toAdd.add(new UserPersonalityTrait(appUser, userPersonalityTrait.getName()));
+            }
         }
 
-        for(UserReference userReference : userPropertiesDTO.getReferences()) {
-            toAdd.add(new UserReference(appUser, userReference.getName(), userReference.getPhoneNumber(), userReference.getEmail()));
+        if(userPropertiesDTO.getReferences() != null && userPropertiesDTO.getReferences().size() > 0) {
+            for (UserReference userReference : userPropertiesDTO.getReferences()) {
+                toAdd.add(new UserReference(appUser, userReference.getName(), userReference.getPhoneNumber(), userReference.getEmail()));
+            }
         }
 
-        for(UserSkill userSkill : userPropertiesDTO.getSkills()) {
-            toAdd.add(new UserSkill(appUser, userSkill.getName()));
+        if(userPropertiesDTO.getSkills() != null && userPropertiesDTO.getSkills().size() > 0) {
+            for (UserSkill userSkill : userPropertiesDTO.getSkills()) {
+                toAdd.add(new UserSkill(appUser, userSkill.getName()));
+            }
         }
 
-        for(UserStudy userStudy : userPropertiesDTO.getStudies()) {
-            toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
+        if(userPropertiesDTO.getStudies() != null && userPropertiesDTO.getStudies().size() > 0) {
+            for (UserStudy userStudy : userPropertiesDTO.getStudies()) {
+                toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
+            }
         }
 
         propertyRepository.saveAll(toAdd);
