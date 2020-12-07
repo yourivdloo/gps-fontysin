@@ -1,6 +1,6 @@
-package fontysin.project.model;
+package fontysin.project.entities.model;
 
-import fontysin.project.model.user.AppUser;
+import fontysin.project.entities.model.user.AppUser;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

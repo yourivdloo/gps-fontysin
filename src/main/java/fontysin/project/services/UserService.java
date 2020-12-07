@@ -2,7 +2,7 @@ package fontysin.project.services;
 
 import fontysin.project.controllers.Util;
 import fontysin.project.exceptions.ConflictException;
-import fontysin.project.model.user.AppUser;
+import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 

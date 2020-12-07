@@ -1,4 +1,4 @@
-package fontysin.project.dto;
+package fontysin.project.entities.dto;
 
 public class UserStudyDTO {
     private String name;

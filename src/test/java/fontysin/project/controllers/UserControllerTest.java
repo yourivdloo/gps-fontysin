@@ -1,10 +1,10 @@
 package fontysin.project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fontysin.project.dto.UserDTO;
-import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserProperty;
-import fontysin.project.model.user.properties.UserHobby;
+import fontysin.project.entities.dto.UserDTO;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.entities.model.user.UserProperty;
+import fontysin.project.entities.model.user.properties.UserHobby;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.junit.jupiter.api.Test;

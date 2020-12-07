@@ -1,11 +1,11 @@
 package fontysin.project.controllers;
 
-import fontysin.project.dto.UserDTO;
+import fontysin.project.entities.dto.UserDTO;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.exceptions.NotImplementedException;
-import fontysin.project.model.user.AppUser;
+import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -56,7 +56,7 @@ public class UserController {
             throw new InternalServerException("We couldn't create the user");
         }
 
-        propertyService.addUserProperties(user.getUserPropertiesDTO());
+        propertyService.addUserProperties(user.getUserProperties());
 
         UserDTO toSend = new UserDTO(result, propertyService.getUserProperties(result.getPcn()));
 

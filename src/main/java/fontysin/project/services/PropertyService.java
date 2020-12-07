@@ -1,12 +1,12 @@
 package fontysin.project.services;
 
 import fontysin.project.controllers.Util;
-import fontysin.project.dto.UserPropertiesDTO;
-import fontysin.project.dto.UserPropertyDTO;
+import fontysin.project.entities.dto.UserPropertiesDTO;
+import fontysin.project.entities.dto.UserPropertyDTO;
 import fontysin.project.exceptions.BadRequestException;
-import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserProperty;
-import fontysin.project.model.user.properties.*;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.entities.model.user.UserProperty;
+import fontysin.project.entities.model.user.properties.*;
 import fontysin.project.repositories.PropertyRepository;
 import org.springframework.stereotype.Service;
 
