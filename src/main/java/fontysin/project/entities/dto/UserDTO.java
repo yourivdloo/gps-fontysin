@@ -42,5 +42,5 @@ public class UserDTO {
     private String address;
     private String zipCode;
     private String city;
-    private UserPropertiesDTO userProperties;
+    private UserPropertiesDTO userProperties = new UserPropertiesDTO();
 }

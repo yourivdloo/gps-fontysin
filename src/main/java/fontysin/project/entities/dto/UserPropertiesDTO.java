@@ -50,6 +50,8 @@ public class UserPropertiesDTO {
         }
     }
 
+    public UserPropertiesDTO(){}
+
     private List<UserHobby> hobbies = new ArrayList<>();
     private List<UserInterest> interests = new ArrayList<>();
     private List<UserJob> jobs = new ArrayList<>();
