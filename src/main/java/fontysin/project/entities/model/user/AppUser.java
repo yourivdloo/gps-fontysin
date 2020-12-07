@@ -1,7 +1,7 @@
-package fontysin.project.model.user;
+package fontysin.project.entities.model.user;
 
-import fontysin.project.dto.UserDTO;
-import fontysin.project.model.Project;
+import fontysin.project.entities.dto.UserDTO;
+import fontysin.project.entities.model.Project;
 import lombok.Getter;
 import lombok.Setter;
 

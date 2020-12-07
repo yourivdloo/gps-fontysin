@@ -1,17 +1,12 @@
 package fontysin.project;
 
-import fontysin.project.controllers.DemoController;
-import fontysin.project.controllers.UserController;
 import fontysin.project.controllers.Util;
-import fontysin.project.model.user.AppUser;
+import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
 import fontysin.project.services.UserService;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 

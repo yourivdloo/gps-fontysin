@@ -1,7 +1,7 @@
-package fontysin.project.dto;
+package fontysin.project.entities.dto;
 
-import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserProperty;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.entities.model.user.UserProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +22,7 @@ public class UserDTO {
         this.address = user.getAddress();
         this.zipCode = user.getZipCode();
         this.city = user.getCity();
-        this.userPropertiesDTO = new UserPropertiesDTO(userProperties);
+        this.userProperties = new UserPropertiesDTO(userProperties);
     }
 
     public UserDTO() {
@@ -42,5 +42,5 @@ public class UserDTO {
     private String address;
     private String zipCode;
     private String city;
-    private UserPropertiesDTO userPropertiesDTO;
+    private UserPropertiesDTO userProperties = new UserPropertiesDTO();
 }

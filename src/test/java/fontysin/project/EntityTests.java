@@ -1,7 +1,7 @@
 package fontysin.project;
 
-import fontysin.project.model.user.properties.*;
-import fontysin.project.model.user.*;
+import fontysin.project.entities.model.user.properties.*;
+import fontysin.project.entities.model.user.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -56,15 +56,13 @@ class EntityTests {
         //Arrange
         AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "McDonald's employee";
-        String city = "Eindhoven";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = LocalDateTime.now().format(formatter);
         String endDate = LocalDateTime.now().plusDays(50).format(formatter);
         //Act
-        UserJob job = new UserJob(user, name, city, startDate, endDate);
+        UserJob job = new UserJob(user, name, startDate, endDate);
         //Assert
         assertEquals(name, job.getName());
-        assertEquals(city, job.getCity());
     }
 
     @Test
@@ -144,11 +142,12 @@ class EntityTests {
         AppUser user = new AppUser(123456, "Alex", "", "Jones");
         String name = "quick thinker";
         String school = "Fontys";
+        String city = "Eindhoven";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = LocalDateTime.now().format(formatter);
         String endDate = LocalDateTime.now().plusYears(5).format(formatter);
         //Act
-        UserStudy study = new UserStudy(user, name, school, startDate, endDate, false);
+        UserStudy study = new UserStudy(user, name, school, city, startDate, endDate, false);
         //Assert
         assertEquals(name, study.getName());
         assertEquals(school, study.getSchool());

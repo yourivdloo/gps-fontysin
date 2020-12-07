@@ -1,12 +1,12 @@
 package fontysin.project.services;
 
 import fontysin.project.controllers.Util;
-import fontysin.project.dto.UserPropertiesDTO;
-import fontysin.project.dto.UserPropertyDTO;
+import fontysin.project.entities.dto.UserPropertiesDTO;
+import fontysin.project.entities.dto.UserPropertyDTO;
 import fontysin.project.exceptions.BadRequestException;
-import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserProperty;
-import fontysin.project.model.user.properties.*;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.entities.model.user.UserProperty;
+import fontysin.project.entities.model.user.properties.*;
 import fontysin.project.repositories.PropertyRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +38,7 @@ public class PropertyService {
                 toAdd = new UserInterest(appUser, userPropertyDTO.getName());
                 break;
             case "job":
-                toAdd = new UserJob(appUser, userPropertyDTO.getName(), userPropertyDTO.getCity(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
+                toAdd = new UserJob(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
                 break;
             case "language":
                 toAdd = new UserLanguage(appUser, userPropertyDTO.getName());
@@ -59,7 +59,7 @@ public class PropertyService {
                 toAdd = new UserSkill(appUser, userPropertyDTO.getName());
                 break;
             case "study":
-                toAdd = new UserStudy(appUser, userPropertyDTO.getName(), userPropertyDTO.getSchool(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate(), userPropertyDTO.getFinished());
+                toAdd = new UserStudy(appUser, userPropertyDTO.getName(), userPropertyDTO.getSchool(), userPropertyDTO.getCity(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate(), userPropertyDTO.getFinished());
                 break;
             default:
                 throw new BadRequestException("The provided property is invalid");
@@ -81,7 +81,7 @@ public class PropertyService {
         }
 
         for (UserJob userJob : emptyIfNull(userPropertiesDTO.getJobs())) {
-            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCity(), userJob.getStartDate(), userJob.getEndDate()));
+            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getStartDate(), userJob.getEndDate()));
         }
 
         for (UserLanguage userLanguage : emptyIfNull(userPropertiesDTO.getLanguages())) {
@@ -110,7 +110,7 @@ public class PropertyService {
         }
 
         for (UserStudy userStudy : emptyIfNull(userPropertiesDTO.getStudies())) {
-            toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
+            toAdd.add(new UserStudy(appUser, userStudy.getName(), userStudy.getSchool(), userStudy.getCity(), userStudy.getStartDate(), userStudy.getEndDate(), userStudy.isFinished()));
         }
 
         propertyRepository.saveAll(toAdd);

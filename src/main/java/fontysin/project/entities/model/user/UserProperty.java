@@ -1,4 +1,4 @@
-package fontysin.project.model.user;
+package fontysin.project.entities.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

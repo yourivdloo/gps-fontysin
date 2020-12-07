@@ -1,15 +1,16 @@
-package fontysin.project.model.user.properties;
+package fontysin.project.entities.model.user.properties;
 
-import fontysin.project.model.user.AppUser;
-import fontysin.project.model.user.UserProperty;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.entities.model.user.UserProperty;
 
 import javax.persistence.Entity;
 
 @Entity(name = "Study")
 public class UserStudy extends UserProperty {
-    public UserStudy(AppUser appUser, String name, String school, String startDate, String endDate, boolean finished) {
+    public UserStudy(AppUser appUser, String name, String school, String city, String startDate, String endDate, boolean finished) {
         super(appUser, name);
         this.school = school;
+        this.city = city;
         this.startDate = startDate;
         this.endDate = endDate;
         this.finished = finished;
@@ -20,6 +21,8 @@ public class UserStudy extends UserProperty {
     }
 
     private String school;
+
+    private String city;
 
     private String startDate;
 
@@ -33,6 +36,14 @@ public class UserStudy extends UserProperty {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStartDate() {

@@ -1,9 +1,9 @@
-package fontysin.project.dto;
+package fontysin.project.entities.dto;
 
 
 import fontysin.project.exceptions.InternalServerException;
-import fontysin.project.model.user.UserProperty;
-import fontysin.project.model.user.properties.*;
+import fontysin.project.entities.model.user.UserProperty;
+import fontysin.project.entities.model.user.properties.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -49,6 +49,8 @@ public class UserPropertiesDTO {
             }
         }
     }
+
+    public UserPropertiesDTO(){}
 
     private List<UserHobby> hobbies = new ArrayList<>();
     private List<UserInterest> interests = new ArrayList<>();

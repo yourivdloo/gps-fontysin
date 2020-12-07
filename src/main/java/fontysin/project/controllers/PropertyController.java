@@ -1,7 +1,7 @@
 package fontysin.project.controllers;
 
-import fontysin.project.dto.UserPropertyDTO;
-import fontysin.project.model.user.UserProperty;
+import fontysin.project.entities.dto.UserPropertyDTO;
+import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.services.PropertyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
