@@ -1,11 +1,34 @@
 package fontysin.project.dto;
 
+import fontysin.project.model.user.AppUser;
+import fontysin.project.model.user.UserProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class UserDTO {
+    public UserDTO(AppUser user, Iterable<UserProperty> userProperties) {
+        this.pcn = user.getPcn();
+        this.emailAddress = user.getEmailAddress();
+        this.firstName = user.getFirstName();
+        this.prefix = user.getPrefix();
+        this.lastName = user.getLastName();
+        this.privacySettings = user.getPrivacySettings();
+        this.nationality = user.getNationality();
+        this.birthday = user.getBirthday();
+        this.birthPlace = user.getBirthPlace();
+        this.phoneNumber = user.getPhoneNumber();
+        this.address = user.getAddress();
+        this.zipCode = user.getZipCode();
+        this.city = user.getCity();
+        this.userPropertiesDTO = new UserPropertiesDTO(userProperties);
+    }
+
+    public UserDTO() {
+
+    }
+
     private int pcn;
     private String emailAddress;
     private String firstName;
@@ -19,5 +42,5 @@ public class UserDTO {
     private String address;
     private String zipCode;
     private String city;
-    private UserPropertiesDTO userProperties;
+    private UserPropertiesDTO userPropertiesDTO;
 }

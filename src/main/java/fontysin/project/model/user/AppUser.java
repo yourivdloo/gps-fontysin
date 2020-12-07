@@ -14,23 +14,6 @@ import java.util.Collection;
 @Entity
 //@Table(name = "users")
 public class AppUser {
-    public AppUser(int pcn, String firstName, String prefix, String lastName, String emailAddress, int privacySettings, String nationality, String birthday, String birthPlace, String phoneNumber, String address, String zipCode, String city
-    ) {
-        this.pcn = pcn;
-        this.firstName = firstName;
-        this.prefix = prefix;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.privacySettings = privacySettings;
-        this.nationality = nationality;
-        this.birthday = birthday;
-        this.birthPlace = birthPlace;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.city = city;
-    }
-
     public AppUser(UserDTO user) {
         this.pcn = user.getPcn();
         this.firstName = user.getFirstName();
@@ -47,7 +30,7 @@ public class AppUser {
         this.city = user.getCity();
     }
 
-    public AppUser(int pcn, String firstName, String Prefix, String lastName) {
+    public AppUser(int pcn, String firstName, String prefix, String lastName) {
         this.pcn = pcn;
         this.firstName = firstName;
         this.prefix = prefix;
