@@ -47,7 +47,7 @@ public class PropertyService {
                 toAdd = new UserLicense(appUser, userPropertyDTO.getName());
                 break;
             case "participation":
-                toAdd = new UserParticipation(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
+                toAdd = new UserParticipation(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate());
                 break;
             case "personality":
                 toAdd = new UserPersonalityTrait(appUser, userPropertyDTO.getName());
@@ -93,7 +93,7 @@ public class PropertyService {
         }
 
         for (UserParticipation userParticipation : emptyIfNull(userPropertiesDTO.getParticipations())) {
-            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
+            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate()));
         }
 
 

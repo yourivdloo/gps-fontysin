@@ -94,9 +94,8 @@ class EntityTests {
         String name = "Fontys open day";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = LocalDateTime.now().format(formatter);
-        String endDate = LocalDateTime.now().plusDays(2).format(formatter);
         //Act
-        UserParticipation participation = new UserParticipation(user, name, startDate, endDate);
+        UserParticipation participation = new UserParticipation(user, name, startDate);
         //Assert
         assertEquals(name, participation.getName());
     }
