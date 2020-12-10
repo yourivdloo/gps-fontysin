@@ -3,6 +3,7 @@ package fontysin.project.entities.dto;
 public class UserPropertyDTO {
     private String type;
     private String name;
+    private String companyName;
     private String email;
     private String phoneNumber;
     private String city;
@@ -17,6 +18,10 @@ public class UserPropertyDTO {
 
     public String getName() {
         return name;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 
     public String getEmail() {
