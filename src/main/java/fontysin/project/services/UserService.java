@@ -28,6 +28,7 @@ public class UserService {
 
     public AppUser createUser(AppUser user){
         user.setPcn(Util.getPcn());
+        user.setIsStudent(Util.isStudent());
 
         if(userRepository.findByPcn(user.getPcn()).isPresent()) {
             throw new ConflictException("A user with this PCN already exists");
