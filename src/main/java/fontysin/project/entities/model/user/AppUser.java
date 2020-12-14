@@ -15,7 +15,7 @@ import java.util.Collection;
 //@Table(name = "users")
 public class AppUser {
     public AppUser(UserDTO user) {
-        this.pcn = user.getPcn();
+        this.pcn = 0;
         this.firstName = user.getFirstName();
         this.prefix = user.getPrefix();
         this.lastName = user.getLastName();
@@ -28,6 +28,7 @@ public class AppUser {
         this.address = user.getAddress();
         this.zipCode = user.getZipCode();
         this.city = user.getCity();
+        this.isStudent = true;
     }
 
     public AppUser(int pcn, String firstName, String prefix, String lastName) {
@@ -80,6 +81,9 @@ public class AppUser {
 
 //    @Column(name="city")
     private String city;
+
+//    @Column(name="isStudent")
+    private Boolean isStudent;
 
     @ManyToMany
     @JoinTable(name="project_collaborators",

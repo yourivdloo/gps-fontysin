@@ -55,12 +55,13 @@ class EntityTests {
     void userJobCtor(){
         //Arrange
         AppUser user = new AppUser(123456, "Alex", "", "Jones");
-        String name = "McDonald's employee";
+        String name = "Cashier";
+        String companyName = "McDonald's";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = LocalDateTime.now().format(formatter);
         String endDate = LocalDateTime.now().plusDays(50).format(formatter);
         //Act
-        UserJob job = new UserJob(user, name, startDate, endDate);
+        UserJob job = new UserJob(user, name, companyName, startDate, endDate);
         //Assert
         assertEquals(name, job.getName());
     }
@@ -94,9 +95,8 @@ class EntityTests {
         String name = "Fontys open day";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String startDate = LocalDateTime.now().format(formatter);
-        String endDate = LocalDateTime.now().plusDays(2).format(formatter);
         //Act
-        UserParticipation participation = new UserParticipation(user, name, startDate, endDate);
+        UserParticipation participation = new UserParticipation(user, name, startDate);
         //Assert
         assertEquals(name, participation.getName());
     }

@@ -38,7 +38,7 @@ public class PropertyService {
                 toAdd = new UserInterest(appUser, userPropertyDTO.getName());
                 break;
             case "job":
-                toAdd = new UserJob(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
+                toAdd = new UserJob(appUser, userPropertyDTO.getName(), userPropertyDTO.getCompanyName(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
                 break;
             case "language":
                 toAdd = new UserLanguage(appUser, userPropertyDTO.getName());
@@ -47,7 +47,7 @@ public class PropertyService {
                 toAdd = new UserLicense(appUser, userPropertyDTO.getName());
                 break;
             case "participation":
-                toAdd = new UserParticipation(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate(), userPropertyDTO.getEndDate());
+                toAdd = new UserParticipation(appUser, userPropertyDTO.getName(), userPropertyDTO.getStartDate());
                 break;
             case "personality":
                 toAdd = new UserPersonalityTrait(appUser, userPropertyDTO.getName());
@@ -81,7 +81,7 @@ public class PropertyService {
         }
 
         for (UserJob userJob : emptyIfNull(userPropertiesDTO.getJobs())) {
-            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getStartDate(), userJob.getEndDate()));
+            toAdd.add(new UserJob(appUser, userJob.getName(), userJob.getCompanyName(), userJob.getStartDate(), userJob.getEndDate()));
         }
 
         for (UserLanguage userLanguage : emptyIfNull(userPropertiesDTO.getLanguages())) {
@@ -93,7 +93,7 @@ public class PropertyService {
         }
 
         for (UserParticipation userParticipation : emptyIfNull(userPropertiesDTO.getParticipations())) {
-            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate(), userParticipation.getEndDate()));
+            toAdd.add(new UserParticipation(appUser, userParticipation.getName(), userParticipation.getStartDate()));
         }
 
 

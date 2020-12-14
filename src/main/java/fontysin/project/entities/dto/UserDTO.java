@@ -22,6 +22,7 @@ public class UserDTO {
         this.address = user.getAddress();
         this.zipCode = user.getZipCode();
         this.city = user.getCity();
+        this.isStudent = user.getIsStudent();
         this.userProperties = new UserPropertiesDTO(userProperties);
     }
 
@@ -42,5 +43,6 @@ public class UserDTO {
     private String address;
     private String zipCode;
     private String city;
+    private Boolean isStudent;
     private UserPropertiesDTO userProperties = new UserPropertiesDTO();
 }
