@@ -7,12 +7,12 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class UserProperty {
-    public UserProperty(AppUser appUser, String name) {
+    protected UserProperty(AppUser appUser, String name) {
         this.appUser = appUser;
         this.name = name;
     }
 
-    public UserProperty() {
+    protected UserProperty() {
 
     }
 

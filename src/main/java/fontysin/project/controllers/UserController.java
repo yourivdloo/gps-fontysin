@@ -5,7 +5,6 @@ import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
-import fontysin.project.exceptions.NotImplementedException;
 import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
@@ -18,12 +17,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 @Controller
-@CrossOrigin("http://localhost:3001")
 @RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
     private final PropertyService propertyService;
+
+    String error= "A user with that pcn doesn't exist.";
 
     public UserController(UserService userService, PropertyService propertyService) {
         this.userService = userService;
@@ -46,7 +46,7 @@ public class UserController {
             UserDTO toSend = new UserDTO(user, propertyService.getUserProperties(user.getPcn()));
             return new ResponseEntity<>(toSend, HttpStatus.OK);
         } else {
-            throw new NotFoundException("A user with that PCN doesn't exist");
+            throw new NotFoundException(error);
         }
     }
 
@@ -72,7 +72,7 @@ public class UserController {
     public @ResponseBody ResponseEntity<String> deleteUser(@PathVariable int pcn){
         AppUser user = userService.getUserByPcn(pcn);
         if(user == null) {
-            throw new NotFoundException("A user with that PCN doesn't exist");
+            throw new NotFoundException(error);
         }
 
         boolean success = userService.deleteUser(pcn);
@@ -83,14 +83,32 @@ public class UserController {
     }
 
     @PutMapping(path="/{pcn}")
-    public @ResponseBody ResponseEntity<UserDTO> updateUser(@PathVariable int pcn, @RequestBody UserDTO user) {
+    public @ResponseBody ResponseEntity<UserDTO> updateUserInfo(@PathVariable int pcn, @RequestBody UserDTO user){
+        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
+            throw new BadRequestException("The user was not updated - Missing Arguments");
+        }
+
+        AppUser exists = userService.getUserByPcn(pcn);
+        if(exists == null) {
+            throw new NotFoundException(error);
+        }
+
+        AppUser updatedUser = userService.updateUser(new AppUser(user));
+        Iterable<UserProperty> props = propertyService.getUserProperties(pcn);
+        UserDTO result = new UserDTO(updatedUser, props);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PutMapping(path="/{pcn}/props")
+    public @ResponseBody ResponseEntity<UserDTO> updateUserProperties(@PathVariable int pcn, @RequestBody UserDTO user) {
         if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
             throw new BadRequestException("The user was not updated - Missing Arguments");
         }
 
         AppUser result = userService.getUserByPcn(pcn);
         if(result == null) {
-            throw new NotFoundException("A user with that PCN doesn't exist");
+            throw new NotFoundException(error);
         }
 
         propertyService.updateUserProperties(user.getUserProperties());
@@ -167,8 +185,6 @@ public class UserController {
                 propertyService.removeUserProperty(id);
             }
         }
-
-//        AppUser result = userService.updateUser(new AppUser(user));
 
         UserDTO toSend = new UserDTO(result, propertyService.getUserProperties(result.getPcn()));
 
