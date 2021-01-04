@@ -15,7 +15,7 @@ import java.util.Collection;
 //@Table(name = "users")
 public class AppUser {
     public AppUser(UserDTO user) {
-        this.pcn = 0;
+        this.pcn = user.getPcn();
         this.firstName = user.getFirstName();
         this.prefix = user.getPrefix();
         this.lastName = user.getLastName();

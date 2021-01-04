@@ -35,6 +35,10 @@ public class UserService {
         }
         return userRepository.save(user);
     }
+    
+    public AppUser updateUser(AppUser user){
+        return userRepository.save(user);
+    }
 
     public boolean deleteUser(int pcn){
         Optional<AppUser> user = userRepository.findByPcn(pcn);

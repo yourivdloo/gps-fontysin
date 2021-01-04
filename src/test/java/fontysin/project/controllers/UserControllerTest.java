@@ -5,8 +5,11 @@ import fontysin.project.entities.dto.UserDTO;
 import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.entities.model.user.properties.UserHobby;
+import fontysin.project.entities.model.user.properties.UserInterest;
+import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -226,5 +229,98 @@ class UserControllerTest {
 
         // Verify the results
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR.value(), response.getStatus());
+    }
+
+    @Test
+    void updateUserInfo() throws Exception{
+        // Setup
+        AppUser user = new AppUser(438161, "Pim", "van", "Hooren");
+        when(mockUserService.getUserByPcn(438161)).thenReturn(user);
+        when(mockUserService.updateUser(any(AppUser.class))).thenReturn(user);
+        when(mockPropertyService.getUserProperties(438161)).thenReturn(null);
+
+        final List<UserProperty> userProperties = new ArrayList<>();
+        userProperties.add(new UserHobby(user, "Lego"));
+        when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
+
+        // Run the tests
+        final MockHttpServletResponse response = mockMvc.perform(put("/api/user/438161")
+                .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
+                .header("x-ms-client-principal-name", "422773@student.fontys.nl")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        //Verify the results
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
+    @Test
+    void testUpdateUserInfo_BadRequest() throws Exception{
+        // Setup
+
+        // Run the test
+        final MockHttpServletResponse response = mockMvc.perform(put("/api/user/438161")
+                .content("{\"firstName\":\"\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
+                .header("x-ms-client-principal-name", "422773@student.fontys.nl")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        // Verify the results
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
+    }
+
+    @Test
+    void testUpdateUserInfo_NotFound() throws Exception{
+        // Setup
+        when(mockUserService.getUserByPcn(438161)).thenReturn(null);
+
+        // Run the tests
+        final MockHttpServletResponse response = mockMvc.perform(put("/api/user/438161")
+                .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
+                .header("x-ms-client-principal-name", "422773@student.fontys.nl")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        //Verify the results
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+    }
+
+    @Test
+    void testUpdateUserProperties() throws Exception{
+        // Setup
+        AppUser user = new AppUser(438161, "Pim", "van", "Hooren");
+        when(mockUserService.getUserByPcn(438161)).thenReturn(user);
+        when(mockUserService.updateUser(any(AppUser.class))).thenReturn(user);
+        when(mockPropertyService.getUserProperties(438161)).thenReturn(null);
+
+        final List<UserProperty> userProperties = new ArrayList<>();
+        userProperties.add(new UserHobby(user, "Lego"));
+        userProperties.add(new UserInterest(user, "Java"));
+        when(mockPropertyService.getUserProperties(any(int.class))).thenReturn(userProperties);
+
+        // Run the tests
+        final MockHttpServletResponse response = mockMvc.perform(put("/api/user/438161/props")
+                .content("{\"firstName\":\"firstName\",\"lastName\":\"lastName\"}").contentType(MediaType.APPLICATION_JSON)
+                .header("x-ms-client-principal-name", "422773@student.fontys.nl")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        //Verify the results
+        assertEquals(HttpStatus.OK.value(), response.getStatus());
+    }
+
+    @Test
+    void testUpdateUserProperties_BadRequest() throws Exception{
+        // Setup
+
+        // Run the tests
+        final MockHttpServletResponse response = mockMvc.perform(put("/api/user/438161/props")
+                .content("{\"firstName\":\"firstName\",\"lastName\":\"\"}").contentType(MediaType.APPLICATION_JSON)
+                .header("x-ms-client-principal-name", "422773@student.fontys.nl")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        //Verify the results
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
     }
 }
