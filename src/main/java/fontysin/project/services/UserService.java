@@ -26,6 +26,11 @@ public class UserService {
         return user.orElse(null);
     }
 
+    public AppUser getCurrentUser(){
+        int pcn = Util.getPcn();
+        return getUserByPcn(pcn);
+    }
+
     public AppUser createUser(AppUser user){
         user.setPcn(Util.getPcn());
         user.setIsStudent(Util.isStudent());

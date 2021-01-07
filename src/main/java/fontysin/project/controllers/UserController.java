@@ -50,6 +50,17 @@ public class UserController {
         }
     }
 
+    @GetMapping(path="/current")
+    public @ResponseBody ResponseEntity<UserDTO> getCurrentUser(){
+        AppUser user = userService.getCurrentUser();
+        if (user != null){
+            UserDTO toSend = new UserDTO(user, propertyService.getUserProperties(user.getPcn()));
+            return new ResponseEntity<>(toSend, HttpStatus.OK);
+        } else {
+            throw new NotFoundException(error);
+        }
+    }
+
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user) {
         if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
