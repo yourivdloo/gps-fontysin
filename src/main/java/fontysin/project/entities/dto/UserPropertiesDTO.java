@@ -1,6 +1,7 @@
 package fontysin.project.entities.dto;
 
 
+import com.google.common.collect.Iterables;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.entities.model.user.properties.*;
@@ -62,4 +63,8 @@ public class UserPropertiesDTO {
     private List<UserReference> references = new ArrayList<>();
     private List<UserSkill> skills = new ArrayList<>();
     private List<UserStudy> studies = new ArrayList<>();
+
+    public Iterable<UserProperty> getAll() {
+        return Iterables.concat(hobbies, interests, jobs, languages, licenses, participations, personalityTraits, references, skills, studies);
+    }
 }

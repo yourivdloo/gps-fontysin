@@ -1,6 +1,7 @@
 package fontysin.project.controllers;
 
 import fontysin.project.entities.dto.UserDTO;
+import fontysin.project.entities.dto.UserPropertiesDTO;
 import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
@@ -61,7 +62,7 @@ public class UserController {
             throw new InternalServerException("We couldn't create the user");
         }
 
-        propertyService.addUserProperties(user.getUserProperties());
+        propertyService.updateUserProperties(user.getUserProperties());
 
         UserDTO toSend = new UserDTO(result, propertyService.getUserProperties(result.getPcn()));
 
@@ -98,97 +99,6 @@ public class UserController {
         UserDTO result = new UserDTO(updatedUser, props);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-
-    @PutMapping(path="/{pcn}/props")
-    public @ResponseBody ResponseEntity<UserDTO> updateUserProperties(@PathVariable int pcn, @RequestBody UserDTO user) {
-        if (Util.emptyOrNull(new String[]{user.getFirstName(), user.getLastName()})) {
-            throw new BadRequestException("The user was not updated - Missing Arguments");
-        }
-
-        AppUser result = userService.getUserByPcn(pcn);
-        if(result == null) {
-            throw new NotFoundException(error);
-        }
-
-        propertyService.updateUserProperties(user.getUserProperties());
-
-        Iterable<UserProperty> properties = propertyService.getUserProperties(pcn);
-
-        Iterator<UserProperty> itr = properties.iterator();
-
-        while(itr.hasNext()){
-            boolean removed = true;
-            int id = itr.next().getId();
-
-            for(UserProperty prop : user.getUserProperties().getHobbies()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getInterests()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getJobs()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getLanguages()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getLicenses()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getParticipations()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getPersonalityTraits()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getReferences()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getSkills()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            for(UserProperty prop : user.getUserProperties().getStudies()){
-                if(id == prop.getId() || prop.getId()==0){
-                    removed = false;
-                }
-            }
-
-            if(removed){
-                propertyService.removeUserProperty(id);
-            }
-        }
-
-        UserDTO toSend = new UserDTO(result, propertyService.getUserProperties(result.getPcn()));
-
-        return new ResponseEntity<>(toSend, HttpStatus.OK);
     }
 
     @GetMapping(path="/search/{firstName}")
