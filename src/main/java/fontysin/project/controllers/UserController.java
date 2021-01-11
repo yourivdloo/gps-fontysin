@@ -1,21 +1,17 @@
 package fontysin.project.controllers;
 
 import fontysin.project.entities.dto.UserDTO;
-import fontysin.project.entities.dto.UserPropertiesDTO;
+import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.entities.model.user.UserProperty;
 import fontysin.project.exceptions.BadRequestException;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
-import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.Iterator;
 
 @Controller
 @RequestMapping("/api/user")

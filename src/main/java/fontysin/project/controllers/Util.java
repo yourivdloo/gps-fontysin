@@ -1,10 +1,6 @@
 package fontysin.project.controllers;
 
-import fontysin.project.entities.dto.UserDTO;
-import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.exceptions.InternalServerException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

@@ -51,8 +51,4 @@ public class PropertyService {
     public Iterable<UserProperty> getUserProperties(int pcn) {
         return propertyRepository.findByAppUserPcn(pcn);
     }
-
-    private <T> Iterable<T> emptyIfNull(Iterable<T> iterable) {
-        return iterable == null ? List.of() : iterable;
-    }
 }
