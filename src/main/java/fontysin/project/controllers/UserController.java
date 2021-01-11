@@ -190,4 +190,9 @@ public class UserController {
 
         return new ResponseEntity<>(toSend, HttpStatus.OK);
     }
+
+    @GetMapping(path="/search/{firstName}")
+    public @ResponseBody ResponseEntity<Iterable<AppUser>> basicSearch(@PathVariable String firstName) {
+        return new ResponseEntity<>(userService.searchByFirstName(firstName), HttpStatus.OK);
+    }
 }

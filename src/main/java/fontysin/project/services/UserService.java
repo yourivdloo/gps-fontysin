@@ -6,6 +6,7 @@ import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -48,5 +49,10 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+    public Iterable<AppUser> searchByFirstName(String firstName) {
+        Optional<Iterable<AppUser>> found = userRepository.findAllByFirstNameContains(firstName);
+        return found.orElse(new ArrayList<>());
     }
 }
