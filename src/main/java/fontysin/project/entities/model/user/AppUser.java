@@ -85,6 +85,10 @@ public class AppUser {
 //    @Column(name="isStudent")
     private Boolean isStudent;
 
+    public String getName(){
+        return  (this.firstName + " " + this.prefix).trim() + " " + this.lastName;
+    }
+
     @ManyToMany
     @JoinTable(name="project_collaborators",
             joinColumns = { @JoinColumn(name = "pcn") },
