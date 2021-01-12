@@ -16,7 +16,7 @@ public class ChatController {
     }
 
     @MessageMapping("/chat")
-    @SendTo("/topic/public")
+    @SendTo("/api/topic/public")
     public ChatMessage handleMessage(ChatMessage message) {
         message.setSender(userService.getUserByPcn(Util.getPcn()).getName());
         return message;
