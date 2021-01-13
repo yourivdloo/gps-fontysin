@@ -27,6 +27,17 @@ public class UserController {
         this.propertyService = propertyService;
     }
 
+    @GetMapping(path="/")
+    public @ResponseBody ResponseEntity<UserDTO> getMyPcn(){
+        AppUser user = userService.getUserByPcn(Util.getPcn());
+        if (user != null){
+            UserDTO toSend = new UserDTO(user, propertyService.getUserProperties(user.getPcn()));
+            return new ResponseEntity<>(toSend, HttpStatus.OK);
+        } else {
+            throw new NotFoundException(error);
+        }
+    }
+
     @GetMapping(path="/all")
     public @ResponseBody ResponseEntity<Iterable<AppUser>> getAllUsers(){
         Iterable<AppUser> users = userService.getAllUsers();
