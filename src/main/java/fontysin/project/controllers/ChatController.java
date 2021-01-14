@@ -1,6 +1,8 @@
 package fontysin.project.controllers;
 
 import fontysin.project.entities.model.ChatMessage;
+import fontysin.project.entities.model.user.AppUser;
+import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.services.UserService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -20,8 +22,22 @@ public class ChatController {
     @MessageMapping("/chat")
     @SendTo("/api/topic/public")
     public ChatMessage handleMessage(ChatMessage message) {
-        message.setSender(userService.getUserByPcn(Util.getPcn()).getName());
-        return message;
+        try{
+            var pcn = Integer.parseInt(message.getSender());
+            AppUser user = userService.getUserByPcn(pcn);
+
+            if(user == null){
+                throw new InternalServerException("Unable to parse PCN");
+            }
+
+            message.setSender(user.getName());
+            return message;
+        }catch(Exception e){
+            message.setContent("Could not identify User");
+            message.setType(ChatMessage.MessageType.JOIN);
+            message.setSender("System");
+            return message;
+        }
     }
 
 }

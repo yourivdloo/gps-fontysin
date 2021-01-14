@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/user")
 public class UserController {
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping(path="/")
-    public @ResponseBody ResponseEntity<UserDTO> getMyPcn(){
+    public @ResponseBody ResponseEntity<UserDTO> whoAmI(){
         AppUser user = userService.getUserByPcn(Util.getPcn());
         if (user != null){
             UserDTO toSend = new UserDTO(user, propertyService.getUserProperties(user.getPcn()));
