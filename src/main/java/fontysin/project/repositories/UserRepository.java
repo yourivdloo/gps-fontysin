@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<AppUser, Integer> {
     Optional<AppUser> findByPcn(int pcn);
-    Optional<Iterable<AppUser>> findAllByFirstNameContains(String searchString);
+    Optional<Iterable<AppUser>> findAllByFirstNameContainsAndPrivacySettings(String searchString, int privacy);
 }

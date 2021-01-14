@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public Iterable<AppUser> searchByFirstName(String firstName) {
-        Optional<Iterable<AppUser>> found = userRepository.findAllByFirstNameContains(firstName);
+        Optional<Iterable<AppUser>> found = userRepository.findAllByFirstNameContainsAndPrivacySettings(firstName, 0);
         return found.orElse(new ArrayList<>());
     }
 }
