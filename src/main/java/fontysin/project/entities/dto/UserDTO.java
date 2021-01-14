@@ -11,6 +11,7 @@ public class UserDTO {
     public UserDTO(AppUser user, Iterable<UserProperty> userProperties) {
         this.pcn = user.getPcn();
         this.emailAddress = user.getEmailAddress();
+        this.fullName = user.getName();
         this.firstName = user.getFirstName();
         this.prefix = user.getPrefix();
         this.lastName = user.getLastName();
@@ -32,6 +33,7 @@ public class UserDTO {
 
     private int pcn;
     private String emailAddress;
+    private String fullName;
     private String firstName;
     private String prefix;
     private String lastName;
