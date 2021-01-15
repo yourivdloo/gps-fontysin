@@ -3,6 +3,7 @@ package fontysin.project.entities.model;
 public class ChatMessage {
 	private String content;
 	private String sender;
+	private String time;
 	private MessageType type;
 
 	public enum MessageType {
@@ -23,6 +24,14 @@ public class ChatMessage {
 
 	public void setSender(String sender) {
 		this.sender = sender;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public MessageType getType() {
