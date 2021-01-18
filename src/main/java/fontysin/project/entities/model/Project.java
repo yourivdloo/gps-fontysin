@@ -1,6 +1,7 @@
 package fontysin.project.entities.model;
 
 import fontysin.project.entities.model.user.AppUser;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@NoArgsConstructor
 //@Table(name = "projects")
 public class Project {
     @Id
@@ -24,7 +26,7 @@ public class Project {
     private String url;
 
     @ManyToMany(mappedBy="data")
-    private Collection<AppUser> users = new ArrayList<>();
+    private Collection<AppUser> users;
 
     public int getProjectId() {
         return projectId;
@@ -48,5 +50,12 @@ public class Project {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Project(int projectId, String name, String url, Collection<AppUser> users) {
+        this.projectId = projectId;
+        this.name = name;
+        this.url = url;
+        this.users = users;
     }
 }
