@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 @Controller
 public class ChatController {
@@ -34,6 +35,7 @@ public class ChatController {
             message.setSender(user.getName());
 
             SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+            formatter.setTimeZone(TimeZone.getTimeZone("CET"));
             Date date = new Date();
             message.setTime(formatter.format(date));
             return message;
