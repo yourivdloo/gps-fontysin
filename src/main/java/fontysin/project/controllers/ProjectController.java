@@ -6,7 +6,6 @@ import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.services.ProjectService;
-import fontysin.project.services.PropertyService;
 import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
