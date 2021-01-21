@@ -40,6 +40,7 @@ public class ProjectController {
         List<AppUser> users = new ArrayList<>();
         users.add(user);
         projectDTO.setUsers(users);
+
         return new ResponseEntity<>(projectService.createProject(projectDTO), HttpStatus.CREATED);
     }
 
@@ -78,5 +79,19 @@ public class ProjectController {
     @PutMapping(path="/update")
     public @ResponseBody ResponseEntity<Project> updateProject(@RequestBody ProjectDTO projectDTO) {
         return new ResponseEntity<>(projectService.createProject(projectDTO), HttpStatus.OK);
+    }
+
+    @PutMapping(path="/update/list")
+    public @ResponseBody ResponseEntity<List<Project>> updateProject(@RequestBody List<ProjectDTO> projectDTOList) {
+        List<Project> projects = new ArrayList<>();
+        for(ProjectDTO projectDTO : projectDTOList){
+            Project project = projectService.createProject(projectDTO);
+
+            if(project.getProjectId() > 0){
+                projects.add(project);
+            }
+        }
+
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 }
