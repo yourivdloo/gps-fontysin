@@ -1,5 +1,6 @@
 package fontysin.project.entities.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fontysin.project.entities.dto.UserDTO;
 import fontysin.project.entities.model.Project;
 import lombok.Getter;
@@ -89,7 +90,8 @@ public class AppUser {
         return  (this.firstName + " " + this.prefix).trim() + " " + this.lastName;
     }
 
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY )
     @JoinTable(name="project_collaborators",
             joinColumns = { @JoinColumn(name = "pcn") },
             inverseJoinColumns = { @JoinColumn(name = "projectId") })

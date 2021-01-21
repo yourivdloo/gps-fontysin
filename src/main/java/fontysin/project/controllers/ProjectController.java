@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/project")
 public class ProjectController {
@@ -27,14 +28,24 @@ public class ProjectController {
     }
 
     @GetMapping(path="/")
-    public @ResponseBody ResponseEntity<List<Project>> getMyProjects() {
+    public @ResponseBody ResponseEntity<List<ProjectDTO>> getMyProjects() {
         AppUser user = userService.getUserByPcn(Util.getPcn());
-        return new ResponseEntity<>(projectService.getProjectsByPcn(user.getPcn()), HttpStatus.OK);
+        var projects = projectService.getProjectsByPcn(user.getPcn());
+        var projectDTOS = new ArrayList<>();
+        for(Project project : projects){
+            projectDTOS.add(new ProjectDTO(project.getProjectId(), project.getName(), project.getUrl(), project.getUsers()));
+        }
+        return new ResponseEntity(projectDTOS, HttpStatus.OK);
     }
 
     @GetMapping(path="/{pcn}")
-    public @ResponseBody ResponseEntity<List<Project>> getProjectsByPcn(@PathVariable int pcn) {
-        return new ResponseEntity<>(projectService.getProjectsByPcn(pcn), HttpStatus.OK);
+    public @ResponseBody ResponseEntity<List<ProjectDTO>> getProjectsByPcn(@PathVariable int pcn) {
+        var projects = projectService.getProjectsByPcn(pcn);
+        var projectDTOS = new ArrayList<>();
+        for(Project project : projects){
+            projectDTOS.add(new ProjectDTO(project.getProjectId(), project.getName(), project.getUrl(), project.getUsers()));
+        }
+        return new ResponseEntity(projectDTOS, HttpStatus.OK);
     }
 
     @PostMapping(path="/new")

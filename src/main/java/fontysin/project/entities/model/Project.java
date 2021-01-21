@@ -52,6 +52,14 @@ public class Project {
         this.url = url;
     }
 
+    public void setUsers(Collection<AppUser> users) {
+        this.users = users;
+    }
+
+    public Collection<AppUser> getUsers() {
+        return users;
+    }
+
     public Project(int projectId, String name, String url, Collection<AppUser> users) {
         this.projectId = projectId;
         this.name = name;
