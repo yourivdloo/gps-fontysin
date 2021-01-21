@@ -2,9 +2,12 @@ package fontysin.project.controllers;
 
 import fontysin.project.entities.dto.ProjectDTO;
 import fontysin.project.entities.model.Project;
+import fontysin.project.entities.model.user.AppUser;
 import fontysin.project.exceptions.InternalServerException;
 import fontysin.project.exceptions.NotFoundException;
 import fontysin.project.services.ProjectService;
+import fontysin.project.services.PropertyService;
+import fontysin.project.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,10 +19,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/project")
 public class ProjectController {
-    final ProjectService projectService;
+    private final ProjectService projectService;
+    private final UserService userService;
+    private final PropertyService propertyService;
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService, UserService userService, PropertyService propertyService) {
         this.projectService = projectService;
+        this.userService = userService;
+        this.propertyService = propertyService;
     }
 
     @GetMapping(path="/{pcn}")
@@ -29,13 +36,22 @@ public class ProjectController {
 
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<Project> createProject(@RequestBody ProjectDTO projectDTO) {
+        AppUser user = userService.getUserByPcn(Util.getPcn());
+        List<AppUser> users = new ArrayList<>();
+        users.add(user);
+        projectDTO.setUsers(users);
         return new ResponseEntity<>(projectService.createProject(projectDTO), HttpStatus.CREATED);
     }
 
     @PostMapping(path="/new/list")
     public @ResponseBody ResponseEntity<List<Project>> createProject(@RequestBody List<ProjectDTO> projectDTOList) {
+        AppUser user = userService.getUserByPcn(Util.getPcn());
+        List<AppUser> users = new ArrayList<>();
+        users.add(user);
+
         List<Project> projects = new ArrayList<>();
         for(ProjectDTO projectDTO : projectDTOList){
+            projectDTO.setUsers(users);
             Project project = projectService.createProject(projectDTO);
 
             if(project.getProjectId() > 0){
