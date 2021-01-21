@@ -26,6 +26,12 @@ public class ProjectController {
         this.userService = userService;
     }
 
+    @GetMapping(path="/")
+    public @ResponseBody ResponseEntity<List<Project>> getMyProjects() {
+        AppUser user = userService.getUserByPcn(Util.getPcn());
+        return new ResponseEntity<>(projectService.getProjectsByPcn(user.getPcn()), HttpStatus.OK);
+    }
+
     @GetMapping(path="/{pcn}")
     public @ResponseBody ResponseEntity<List<Project>> getProjectsByPcn(@PathVariable int pcn) {
         return new ResponseEntity<>(projectService.getProjectsByPcn(pcn), HttpStatus.OK);
