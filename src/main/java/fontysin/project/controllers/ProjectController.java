@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,20 @@ public class ProjectController {
     @PostMapping(path="/new")
     public @ResponseBody ResponseEntity<Project> createProject(@RequestBody ProjectDTO projectDTO) {
         return new ResponseEntity<>(projectService.createProject(projectDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path="/new/list")
+    public @ResponseBody ResponseEntity<List<Project>> createProject(@RequestBody List<ProjectDTO> projectDTOList) {
+        List<Project> projects = new ArrayList<>();
+        for(ProjectDTO projectDTO : projectDTOList){
+            Project project = projectService.createProject(projectDTO);
+
+            if(project.getProjectId() > 0){
+                projects.add(project);
+            }
+        }
+
+        return new ResponseEntity<>(projects, HttpStatus.CREATED);
     }
 
     @DeleteMapping(path="/{id}")
