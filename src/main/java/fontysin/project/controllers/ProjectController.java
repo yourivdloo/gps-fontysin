@@ -21,12 +21,10 @@ import java.util.List;
 public class ProjectController {
     private final ProjectService projectService;
     private final UserService userService;
-    private final PropertyService propertyService;
 
-    public ProjectController(ProjectService projectService, UserService userService, PropertyService propertyService) {
+    public ProjectController(ProjectService projectService, UserService userService) {
         this.projectService = projectService;
         this.userService = userService;
-        this.propertyService = propertyService;
     }
 
     @GetMapping(path="/{pcn}")
